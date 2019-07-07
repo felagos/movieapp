@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View } from 'react-native';
-
-import MovieService from '../services/movie-service';
-import { setGenresMovies } from '../redux/actions/movie-action';
+import { View, Text } from 'react-native';
+import IconWidget from '../widgets/icon-widget';
 
 class MovieScreen extends Component {
 
+    static navigationOptions = ({ navigation }) => ({
+        title: "Pelculas",
+        drawerIcon: <IconWidget name="film" size={16} />
+    });
+
+
     async componentDidMount() {
-        const moviesGenres = await MovieService.getMoviesGenres();
-        this.props.setGenresMovies(moviesGenres);
+        this.props.navigation.openDrawer();
+
     }
 
     render() {
-        const { genres } = this.props;
         return (
-            <View></View>
+            <View><Text>Movie Screen</Text></View>
         );
     }
 
@@ -32,4 +35,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, bindActionToProps)(MovieScreen);
+export default connect(mapStateToProps, null)(MovieScreen);

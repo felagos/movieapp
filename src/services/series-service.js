@@ -1,11 +1,13 @@
 import { config } from '../config/config';
+import axios from 'axios';
 
 class SerieService {
 
-    async getMoviesGenres() {
-        const url = `${config.API_BASE}/genre/tv/list?api_key=${config.API_KEY}&language=${config.LANG}`;
-        const response = await fetch(url);
-        return response.genres;
+    async getTopRated(page = 1) {
+        console.log("current page", page);
+        const url = `${config.API_BASE}/tv/top_rated?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
+        const response = await axios.get(url);
+        return response.data.results;
     }
 
 }

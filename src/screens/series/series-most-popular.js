@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-class SerieScreen extends Component {
+class SeriesMostPopular extends Component {
 
     render() {
         return (
             <View></View>
         );
     }
-
 }
 
-export default SerieScreen;
+export default SeriesMostPopular;
