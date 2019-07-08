@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { ListItem } from 'native-base';
+import { ListItem, Card, CardItem, Thumbnail } from 'native-base';
 import SeriesService from '../../services/series-service';
 import Loader from "react-native-modal-loader";
 import GeneralFlatList from '../../layouts/flat-list';
+import { IMG_SIZE, getImage } from '../../util/util';
 
 
 class SeriesTopRated extends Component {
@@ -33,9 +34,14 @@ class SeriesTopRated extends Component {
     }
 
     renderItem = ({ item }) => {
-        return <ListItem>
-            <Text>{item.original_name}</Text>
-        </ListItem>
+        return (
+            <Card>
+                <CardItem cardBody>
+                    <Thumbnail source={{ uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` }} style={{ height: 200, width: null, flex: 1 }} />
+                </CardItem>
+                <Text>{item.original_name}</Text>
+            </Card>
+        );
     }
 
     render() {
