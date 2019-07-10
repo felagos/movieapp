@@ -2,12 +2,13 @@ import React from 'react';
 import { FlatList } from 'react-native';
 
 const GeneralFlatList = props => {
-    const { data, loadMoreData, keyExtractor, renderItem } = props;
+    const { data, onEndReached, keyExtractor, renderItem, numColumns } = props;
     return (
         <FlatList
+            numColumns={numColumns}
             data={data}
-            onEndReached={loadMoreData}
-            onEndThreshold={0}
+            onEndReachedThreshold={0.5}
+            onEndReached={onEndReached}
             keyExtractor={keyExtractor}
             renderItem={renderItem}
         />
