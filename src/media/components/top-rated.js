@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { cutString, getImage, IMG_SIZE } from '../util/util';
+import { cutString, getImage, IMG_SIZE } from '../../util/util';
 
 const styles = StyleSheet.create({
     card: {
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
     }
 });
 
-const TopRated = ({ item, seeDetail }) => {
+const TopRated = ({ item, seeDetail, media }) => {
     const title = item.original_name ? item.original_name : item.title;
     return (
         <View style={styles.card}>
-            <TouchableOpacity onPress={() => { seeDetail(item); }}>
+            <TouchableOpacity onPress={() => { seeDetail(item.id, media); }}>
                 <View style={styles.cardBody}>
                     <Image style={styles.imageThumbnail} source={{ uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` }} />
                     <Text style={styles.title}>{cutString(title)}</Text>

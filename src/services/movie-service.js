@@ -15,6 +15,32 @@ class MovieService {
         return response.data.results;
     }
 
+    async getUpcoming(page = 1) {
+        const url = `${config.API_BASE}/movie/upcoming?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
+        const response = await axios.get(url);
+        return response.data.results;
+    }
+
+    async getGenreByIds(ids) {
+        if(ids.length == 0) return [];
+
+        let genres = await this.getMoviesGenres();
+
+        genres.filter(genre => {
+            if(ids.include(genre.id))
+                return genre;
+        });
+
+        return genres.map(genre => genre.name);
+
+    }
+
+    async getMovieTrailer(id) {
+        const url = `${config.API_BASE}/movie/${id}/videos?api_key=${config.API_KEY}`;
+        const response = await axios.get(url);
+        return response.data.results;
+    }
+
 }
 
 export default new MovieService();

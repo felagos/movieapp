@@ -8,13 +8,16 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingTop: 5
     },
-    titleSection: {
+    title: {
         color: 'black',
         fontWeight: 'bold',
         fontSize: 20
     },
     containerRow: {
-        
+        flexDirection: 'column'
+    },
+    magin20: {
+        marginTop: 20
     }
 });
 
@@ -25,21 +28,21 @@ const HomeLayout = props => {
                 <Grid>
                     <Row>
                         <Col size={100}>
-                            {props.trendingComponent}
+                            {props.upcomingComponent}
                         </Col>
                     </Row>
-                    <Row style={{ marginTop: 20 }}>
+                    <Row style={styles.magin20}>
                         <Col size={100}>
                             <View style={styles.containerRow}>
-                                <Text style={styles.titleSection}>Películas populares</Text>
+                                <Text style={styles.title}>Películas populares</Text>
                                 {props.movieComponent}
                             </View>
                         </Col>
                     </Row>
-                    <Row style={{ marginTop: 20 }}>
+                    <Row style={styles.magin20}>
                         <Col size={100}>
                             <View style={styles.containerRow}>
-                                <Text style={styles.titleSection}>Series populares</Text>
+                                <Text style={styles.title}>Series populares</Text>
                                 {props.serieComponent}
                             </View>
                         </Col>

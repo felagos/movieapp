@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import SeriesService from '../../services/series-service';
 import Loader from "../../widgets/loader-widget";
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SeriesTopRated;
+export default SeriesTopRated;*/
