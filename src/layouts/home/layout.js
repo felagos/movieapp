@@ -5,12 +5,16 @@ import { Grid, Col, Row } from 'native-base';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 5
+        paddingLeft: 5,
+        paddingTop: 5
     },
     titleSection: {
         color: 'black',
         fontWeight: 'bold',
-        fontSize: 22
+        fontSize: 20
+    },
+    containerRow: {
+        
     }
 });
 
@@ -20,6 +24,11 @@ const HomeLayout = props => {
             <ScrollView>
                 <Grid>
                     <Row>
+                        <Col size={100}>
+                            {props.trendingComponent}
+                        </Col>
+                    </Row>
+                    <Row style={{ marginTop: 20 }}>
                         <Col size={100}>
                             <View style={styles.containerRow}>
                                 <Text style={styles.titleSection}>Películas populares</Text>
