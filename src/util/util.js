@@ -8,3 +8,8 @@ export const IMG_SIZE = {
 export const getImage = (img, size) => {
     return `${config.BASE_IMG}/${size}/${img}`;
 }
+
+export const cutString = (string, limit = 28) => {
+    if(string.length < 28) return string;
+    return string.substring(0, limit) + " ...";
+}

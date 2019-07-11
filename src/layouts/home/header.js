@@ -9,12 +9,11 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start"
     },
     series: {
-        marginLeft: 10
+        marginLeft: 50
     }
 });
 
 const HomeHeader = props => {
-    console.log(props);
     return (
         <Header transparent>
             <Left style={styles.left}>

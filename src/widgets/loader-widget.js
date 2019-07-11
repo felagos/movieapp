@@ -17,7 +17,7 @@ const LoaderWidget = ({ loading = false, color, size, opacity = 0.4, text }) => 
             >
                 <View style={styles.activityIndicatorWrapper}>
                     <ActivityIndicator animating={loading} color={color} size={size} />
-                    <Text style={styles.text}>{text}</Text>
+                    {text && <Text style={styles.text}>{text}</Text>}
                 </View>
             </View>
         </Modal>
