@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const UpcomingMovie = ({ item }) => {
+const UpcomingMovie = ({ item, openVideo }) => {
     const title = item.original_name ? item.original_name : item.title;
     return (
         <Card>
@@ -33,7 +33,7 @@ const UpcomingMovie = ({ item }) => {
             </CardItem>
             <CardItem cardBody>
                 <ImageBackground source={{ uri: `${getImage(item.poster_path, IMG_SIZE.original)}` }} style={styles.img}>
-                    <TouchableOpacity onPress={() => { }}>
+                    <TouchableOpacity onPress={() => { openVideo(item.id); }}>
                         <Image resizeMode="center" style={styles.imgPlay} source={require('../../assets/icon-play.png')} />
                     </TouchableOpacity>
                 </ImageBackground>

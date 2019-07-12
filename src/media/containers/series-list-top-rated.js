@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
+import { BarIndicator } from 'react-native-indicators';
 import SeriesService from '../../services/series-service';
 import TopRated from '../components/top-rated';
 
@@ -19,10 +20,14 @@ class SeriesList extends Component {
     }
 
     render() {
+        const { series } = this.state;
+        if (series.length === 0) {
+            return <BarIndicator color="black" />
+        }
         return (
             <FlatList
                 horizontal
-                data={this.state.series}
+                data={series}
                 keyExtractor={i => i.id.toString()}
                 renderItem={this.renderItem}
             />

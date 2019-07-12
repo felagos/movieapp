@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { Platform } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import { BarIndicator } from 'react-native-indicators';
 import MoviesService from '../../services/movie-service';
 import UpcomingMovie from '../components/upcoming-movies';
+import { YouTubeStandaloneAndroid, YouTubeStandaloneIOS } from 'react-native-youtube';
+import { config } from '../../config/config';
 
 class UpcomingMoviesList extends Component {
 
@@ -15,11 +19,34 @@ class UpcomingMoviesList extends Component {
     }
 
     renderItem = ({ item }) => {
-        return <UpcomingMovie item={item} />
+        return <UpcomingMovie item={item} openVideo={this.openVideo} />
+    }
+
+    openVideo = async (id) => {
+        const videoIds = await MoviesService.getMovieTrailer(id);
+
+        if (Platform.OS === "android") {
+            YouTubeStandaloneAndroid.playVideos({
+                apiKey: config.GOOGLE_API_KEY,
+                videoIds: videoIds,
+                autoplay: true,
+                play: true
+            })
+                .then(() => console.log('Standalone Player Exited'))
+                .catch(errorMessage => console.error(errorMessage));
+        }
+        else {
+            YouTubeStandaloneIOS.playVideo(videoIds[0])
+                .then(() => console.log('Standalone Player Exited'))
+                .catch(errorMessage => console.error(errorMessage))
+        }
     }
 
     render() {
         const { movies } = this.state;
+        if (movies.length === 0) {
+            return <BarIndicator color="black" />
+        }
         return (
             <Carousel
                 ref={(c) => { this._carousel = c; }}

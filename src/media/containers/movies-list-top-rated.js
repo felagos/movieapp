@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
+import { BarIndicator } from 'react-native-indicators';
 import MoviesService from '../../services/movie-service';
 import TopRated from '../components/top-rated';
 
@@ -19,10 +20,14 @@ class MovieList extends Component {
     }
 
     render() {
+        const { movies } = this.state;
+        if (movies.length === 0) {
+            return <BarIndicator color="black" />
+        }
         return (
             <FlatList
                 horizontal
-                data={this.state.movies}
+                data={movies}
                 keyExtractor={i => i.id.toString()}
                 renderItem={this.renderItem}
             />

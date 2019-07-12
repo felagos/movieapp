@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         margin: 5,
-        height: 250
+        height: 250,
+        width: 200
     },
     cardBody: {
         flexDirection: 'column'
@@ -30,7 +31,7 @@ const TopRated = ({ item, seeDetail, media }) => {
         <View style={styles.card}>
             <TouchableOpacity onPress={() => { seeDetail(item.id, media); }}>
                 <View style={styles.cardBody}>
-                    <Image style={styles.imageThumbnail} source={{ uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` }} />
+                    <Image resizeMode="contain" style={styles.imageThumbnail} source={{ uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` }} />
                     <Text style={styles.title}>{cutString(title)}</Text>
                 </View>
             </TouchableOpacity>
