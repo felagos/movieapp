@@ -24,13 +24,12 @@ class UpcomingMoviesList extends Component {
 
     openVideo = async (id) => {
         const videoIds = await MoviesService.getMovieTrailer(id);
-
+        
         if (Platform.OS === "android") {
             YouTubeStandaloneAndroid.playVideos({
                 apiKey: config.GOOGLE_API_KEY,
                 videoIds: videoIds,
-                autoplay: true,
-                play: true
+                autoplay: true
             })
                 .then(() => console.log('Standalone Player Exited'))
                 .catch(errorMessage => console.error(errorMessage));

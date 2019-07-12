@@ -37,7 +37,7 @@ class MovieService {
     async getMovieTrailer(id) {
         const url = `${config.API_BASE}/movie/${id}/videos?api_key=${config.API_KEY}`;
         const response = await axios.get(url);
-        return response.data.results.map(result => result.id);
+        return response.data.results.map(result => result.key);
     }
 
 }

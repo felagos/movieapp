@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     imgPlay: {
-        width: 150,
-        height: 150
+        width: 100,
+        height: 100
     }
 });
 
@@ -33,8 +33,8 @@ const UpcomingMovie = ({ item, openVideo }) => {
             </CardItem>
             <CardItem cardBody>
                 <ImageBackground source={{ uri: `${getImage(item.poster_path, IMG_SIZE.original)}` }} style={styles.img}>
-                    <TouchableOpacity onPress={() => { openVideo(item.id); }}>
-                        <Image resizeMode="center" style={styles.imgPlay} source={require('../../assets/icon-play.png')} />
+                    <TouchableOpacity resizeMode="center" onPress={() => { openVideo(item.id); }}>
+                        <Image style={styles.imgPlay} source={require('../../assets/icon-play.png')} />
                     </TouchableOpacity>
                 </ImageBackground>
             </CardItem>
