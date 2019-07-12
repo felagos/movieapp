@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform } from 'react-native';
+import { Platform, Alert } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { BarIndicator } from 'react-native-indicators';
 import MoviesService from '../../services/movie-service';
@@ -25,20 +25,26 @@ class UpcomingMoviesList extends Component {
 
     openVideo = async (id) => {
         const videoIds = await MoviesService.getMovieTrailer(id);
-        
-        if (Platform.OS === "android") {
-            YouTubeStandaloneAndroid.playVideos({
-                apiKey: config.GOOGLE_API_KEY,
-                videoIds: videoIds,
-                autoplay: true
-            })
-                .then(() => console.log('Standalone Player Exited'))
-                .catch(errorMessage => console.error(errorMessage));
+
+        if (videoIds.length === 0) {
+            Alert.alert("", "No se encontraron videos disponibles");
         }
+
         else {
-            YouTubeStandaloneIOS.playVideo(videoIds[0])
-                .then(() => console.log('Standalone Player Exited'))
-                .catch(errorMessage => console.error(errorMessage))
+            if (Platform.OS === "android") {
+                YouTubeStandaloneAndroid.playVideos({
+                    apiKey: config.GOOGLE_API_KEY,
+                    videoIds: videoIds,
+                    autoplay: true
+                })
+                    .then(() => console.log('Standalone Player Exited'))
+                    .catch(errorMessage => console.error(errorMessage));
+            }
+            else {
+                YouTubeStandaloneIOS.playVideo(videoIds[0])
+                    .then(() => console.log('Standalone Player Exited'))
+                    .catch(errorMessage => console.error(errorMessage))
+            }
         }
     }
 

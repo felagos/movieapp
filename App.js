@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import AppNavigation from './src/app-navigator';
 
 export default class App extends Component {

@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     tabNavigation: {
         backgroundColor: "#221f1f",
         color: "#e50914"
+    },
+    statusBar: {
+        backgroundColor: "#221f1f"
     }
 });
 

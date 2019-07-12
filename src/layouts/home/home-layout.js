@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingLeft: 5,
-        paddingTop: 5
+        paddingRight: 5,
+        paddingTop: 2
     },
     title: {
         fontWeight: 'bold',

@@ -37,16 +37,17 @@ class Home extends Component {
     render() {
         return (
             <HomeLayout
-                upcomingComponent={
-                    <UpcomingMoviesList />
-                }
-                serieComponent={
-                    <SeriesList seeDetail={this.seeDetail} />
-                }
-                movieComponent={
-                    <MovieList seeDetail={this.seeDetail} />
-                }
-            />
+                    upcomingComponent={
+                        <UpcomingMoviesList />
+                    }
+                    serieComponent={
+                        <SeriesList seeDetail={this.seeDetail} />
+                    }
+                    movieComponent={
+                        <MovieList seeDetail={this.seeDetail} />
+                    }
+                />
+
         );
     }
 }
