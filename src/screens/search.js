@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import SearchLayout from '../layouts/search/search-layout';
+import HeaderSearch from '../layouts/search/header';
 
 class Search extends Component {
 
+    state = {
+        iconLoading: false
+    };
+
+    static navigationOptions = () => {
+        return {
+            header: null
+        }
+    }
+
+    search = async text => {
+
+    }
+
     render() {
+        const { iconLoading } = this.state;
         return (
-            <View></View>
+            <SearchLayout>
+                <HeaderSearch search={this.search} iconLoading={iconLoading} />
+            </SearchLayout>
         );
     }
 }
