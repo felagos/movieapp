@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     img: {
-        width: 200,
-        height: 200,
+        width: 400,
+        height: 300,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -22,18 +22,13 @@ const styles = StyleSheet.create({
     }
 });
 
-const UpcomingMovie = ({ item, openVideo }) => {
+const UpcomingCover = ({ item, openVideo }) => {
     const title = item.original_name ? item.original_name : item.title;
     return (
         <Card>
-            <CardItem>
-                <Body>
-                    <Text style={styles.title}>{title}</Text>
-                </Body>
-            </CardItem>
             <CardItem cardBody>
-                <ImageBackground source={{ uri: `${getImage(item.poster_path, IMG_SIZE.original)}` }} style={styles.img}>
-                    <TouchableOpacity resizeMode="center" onPress={() => { openVideo(item.id); }}>
+                <ImageBackground resizeMode="stretch" source={{ uri: `${getImage(item.poster_path, IMG_SIZE.original)}` }} style={styles.img}>
+                    <TouchableOpacity onPress={() => { openVideo(item.id); }}>
                         <Image style={styles.imgPlay} source={require('../../assets/icon-play.png')} />
                     </TouchableOpacity>
                 </ImageBackground>
@@ -42,4 +37,4 @@ const UpcomingMovie = ({ item, openVideo }) => {
     );
 }
 
-export default UpcomingMovie;
+export default UpcomingCover;

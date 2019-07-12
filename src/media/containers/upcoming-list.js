@@ -3,9 +3,10 @@ import { Platform } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { BarIndicator } from 'react-native-indicators';
 import MoviesService from '../../services/movie-service';
-import UpcomingMovie from '../components/upcoming-movies';
+import UpcomingCover from '../components/upcoming-cover';
 import { YouTubeStandaloneAndroid, YouTubeStandaloneIOS } from 'react-native-youtube';
 import { config } from '../../config/config';
+import globalStyles from '../../styles/styles';
 
 class UpcomingMoviesList extends Component {
 
@@ -19,7 +20,7 @@ class UpcomingMoviesList extends Component {
     }
 
     renderItem = ({ item }) => {
-        return <UpcomingMovie item={item} openVideo={this.openVideo} />
+        return <UpcomingCover item={item} openVideo={this.openVideo} />
     }
 
     openVideo = async (id) => {
@@ -44,16 +45,15 @@ class UpcomingMoviesList extends Component {
     render() {
         const { movies } = this.state;
         if (movies.length === 0) {
-            return <BarIndicator color="black" />
+            return <BarIndicator color={globalStyles.white.color} />
         }
         return (
             <Carousel
                 ref={(c) => { this._carousel = c; }}
                 data={movies}
                 renderItem={this.renderItem}
-                itemWidth={204}
+                itemWidth={400}
                 sliderWidth={400}
-                firstItem={1}
             />
         );
     }

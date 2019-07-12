@@ -6,6 +6,7 @@ import MyList from './screens/my-list';
 import Movies from './screens/movies';
 import Series from './screens/series';
 import IconWidget from './widgets/icon-widget';
+import globalStyles from './styles/styles';
 
 const HomeStack = createStackNavigator(
     {
@@ -36,16 +37,22 @@ const TabRoot = createBottomTabNavigator(
                 const { routeName } = navigation.state;
 
                 if (routeName === 'Home')
-                    return <IconWidget name="home" color={tintColor} size={16} />
+                    return <IconWidget name="home" color={tintColor} size={20} />
 
                 if (routeName === 'Search')
-                    return <IconWidget name="search" color={tintColor} size={16} />
+                    return <IconWidget name="search" color={tintColor} size={20} />
 
                 if (routeName === 'MyList')
-                    return <IconWidget name="check" color={tintColor} size={16} />
+                    return <IconWidget name="check" color={tintColor} size={20} />
 
             },
-        })
+        }),
+        tabBarOptions: {
+            activeTintColor: globalStyles.tabNavigation.color,
+            style: {
+                backgroundColor: globalStyles.tabNavigation.backgroundColor,
+            }
+        }
     }
 );
 

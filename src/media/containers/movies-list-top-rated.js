@@ -3,6 +3,7 @@ import { FlatList } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
 import MoviesService from '../../services/movie-service';
 import TopRated from '../components/top-rated';
+import globalStyles from '../../styles/styles';
 
 class MovieList extends Component {
 
@@ -22,7 +23,7 @@ class MovieList extends Component {
     render() {
         const { movies } = this.state;
         if (movies.length === 0) {
-            return <BarIndicator color="black" />
+            return <BarIndicator color={globalStyles.white.color} />
         }
         return (
             <FlatList

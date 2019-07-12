@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
         width: 200
     },
     title: {
-        color: 'black',
-        fontWeight: 'bold'
+        color: '#f5f5f1'
     }
 });
 
@@ -31,7 +30,7 @@ const TopRated = ({ item, seeDetail, media }) => {
         <View style={styles.card}>
             <TouchableOpacity onPress={() => { seeDetail(item.id, media); }}>
                 <View style={styles.cardBody}>
-                    <Image resizeMode="contain" style={styles.imageThumbnail} source={{ uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` }} />
+                    <Image resizeMode="stretch" style={styles.imageThumbnail} source={{ uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` }} />
                     <Text style={styles.title}>{cutString(title)}</Text>
                 </View>
             </TouchableOpacity>
