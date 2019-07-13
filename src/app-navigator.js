@@ -4,6 +4,7 @@ import Home from './screens/home';
 import Search from './screens/search';
 import MyList from './screens/my-list';
 import Movies from './screens/movies';
+import MovieDetail from './screens/movie-detail';
 import Series from './screens/series';
 import IconWidget from './widgets/icon-widget';
 import globalStyles from './styles/styles';
@@ -12,7 +13,8 @@ const HomeStack = createStackNavigator(
     {
         Home,
         Movies,
-        Series
+        Series,
+        MovieDetail
     }
 );
 

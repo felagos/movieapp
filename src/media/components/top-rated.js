@@ -28,7 +28,7 @@ const TopRated = ({ item, seeDetail, media }) => {
     const title = item.original_name ? item.original_name : item.title;
     return (
         <View style={styles.card}>
-            <TouchableOpacity onPress={() => { seeDetail(item.id, media); }}>
+            <TouchableOpacity onPress={() => { seeDetail(item.id, media, title); }}>
                 <View style={styles.cardBody}>
                     <Image resizeMode="stretch" style={styles.imageThumbnail} source={{ uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` }} />
                     <Text style={styles.title}>{cutString(title)}</Text>

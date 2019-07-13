@@ -8,22 +8,31 @@ class Search extends Component {
         iconLoading: false
     };
 
-    static navigationOptions = () => {
+    static navigationOptions = ({ navigation }) => {
         return {
-            header: null
+            header: null,
         }
     }
 
-    search = async text => {
+    componentWillMount() {
+        this.props.navigation.setParams({
+            search: this.search
+        });
+    }
 
+    search = async text => {
+        this.setState({iconLoading: true});
+        setTimeout(() => {
+            this.setState({iconLoading: false});
+        }, 10000)
     }
 
     render() {
         const { iconLoading } = this.state;
         return (
-            <SearchLayout>
-                <HeaderSearch search={this.search} iconLoading={iconLoading} />
-            </SearchLayout>
+            <SearchLayout
+                header={<HeaderSearch search={this.search} iconLoading={iconLoading} />}
+            />
         );
     }
 }

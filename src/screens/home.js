@@ -9,7 +9,7 @@ class Home extends Component {
 
     static navigationOptions = ({ navigation }) => {
         const goToMovies = navigation.getParam("goToMovies", () => { });
-        const goToSeries = navigation.getParam("goToSeries", () => { })
+        const goToSeries = navigation.getParam("goToSeries", () => { });
         return {
             header: <HomeHeader goToMovies={goToMovies} goToSeries={goToSeries} />
         }
@@ -30,23 +30,27 @@ class Home extends Component {
         this.props.navigation.navigate("Movies");
     }
 
-    seeDetail = (id, media) => {
-        this.props.navigation.navigate("Detail", { id, media });
+    seeDetailMovie = (id, media, title) => {
+        this.props.navigation.navigate("MovieDetail", { id, media, title });
+    }
+
+    seeDetailSerie = (id, media, title) => {
+        this.props.navigation.navigate("SerieDetail", { id, media, title });
     }
 
     render() {
         return (
             <HomeLayout
-                    upcomingComponent={
-                        <UpcomingMoviesList />
-                    }
-                    serieComponent={
-                        <SeriesList seeDetail={this.seeDetail} />
-                    }
-                    movieComponent={
-                        <MovieList seeDetail={this.seeDetail} />
-                    }
-                />
+                upcomingComponent={
+                    <UpcomingMoviesList />
+                }
+                serieComponent={
+                    <SeriesList seeDetail={this.seeDetailSerie} />
+                }
+                movieComponent={
+                    <MovieList seeDetail={this.seeDetailMovie} />
+                }
+            />
 
         );
     }

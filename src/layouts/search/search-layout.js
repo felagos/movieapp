@@ -1,19 +1,24 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
-import { Container } from 'native-base';
+import { Container, Grid } from 'native-base';
 import globalStyles from '../../styles/styles';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingLeft: 5,
+        paddingRight: 5
     }
 });
 
 const SearchLayout = props => {
     return (
         <SafeAreaView style={[styles.container, globalStyles.container]}>
-            <Container>
-                {props.children}
+            <Container style={[globalStyles.container]}>
+                {props.header}
+                <Grid>
+
+                </Grid>
             </Container>
         </SafeAreaView>
     );

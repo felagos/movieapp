@@ -1,14 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
-import { Card, CardItem, Body } from 'native-base';
+import { StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { Card, CardItem } from 'native-base';
 import { getImage, IMG_SIZE } from '../../util/util';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
-    },
-    title: {
-        fontWeight: "bold"
     },
     img: {
         width: 400,
@@ -24,7 +21,6 @@ const styles = StyleSheet.create({
 });
 
 const UpcomingCover = ({ item, openVideo }) => {
-    const title = item.original_name ? item.original_name : item.title;
     return (
         <Card>
             <CardItem cardBody>

@@ -1,10 +1,12 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { StatusBar, ActivityIndicator } from 'react-native';
 import { Header, Item, Icon, Input } from 'native-base';
+import globalStyles from '../../styles/styles';
 
 const HeaderSearch = props => {
     return (
-        <Header searchBar rounded>
+        <Header searchBar rounded style={[globalStyles.backgroundColorBlack]} transparent>
+            <StatusBar backgroundColor={globalStyles.statusBar.backgroundColor} barStyle="light-content" />
             <Item>
                 <Icon name="search" />
                 <Input placeholder="Buscar" onChangeText={(text) => props.search(text)} />
