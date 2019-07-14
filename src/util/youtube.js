@@ -4,7 +4,7 @@ import { config } from '../config/config';
 export const youtubeAndroid = videos => {
     YouTubeStandaloneAndroid.playVideos({
         apiKey: config.GOOGLE_API_KEY,
-        videoIds: videoIds,
+        videoIds: videos,
         autoplay: true
     })
         .then(() => console.log('Standalone Player Exited'))
@@ -12,7 +12,7 @@ export const youtubeAndroid = videos => {
 }
 
 export const youtubeIOS = video => {
-    YouTubeStandaloneIOS.playVideo(videoIds[0])
+    YouTubeStandaloneIOS.playVideo(video)
         .then(() => console.log('Standalone Player Exited'))
         .catch(errorMessage => console.error(errorMessage))
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Image, StatusBar } from 'react-native';
 import { Header, Left, Text } from 'native-base';
-import globalStyles from '../../styles/styles';
+import { backgroundColorBlack, colorWhite, statusBar } from '../../styles/styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -24,15 +24,15 @@ const styles = StyleSheet.create({
 
 const HomeHeader = props => {
     return (
-        <Header style={[styles.container, globalStyles.container]} transparent>
-            <StatusBar backgroundColor={globalStyles.statusBar.backgroundColor} barStyle="light-content" />
+        <Header style={[styles.container, backgroundColorBlack]} transparent>
+            <StatusBar backgroundColor={statusBar.backgroundColor} barStyle="light-content" />
             <Image source={require('../../assets/movie-icon.png')} style={styles.icon} />
             <Left style={styles.left}>
                 <TouchableOpacity onPress={() => { props.goToMovies() }} style={styles.series}>
-                    <Text style={globalStyles.white}>Películas</Text>
+                    <Text style={colorWhite}>Películas</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { props.goToSeries() }} style={styles.series}>
-                    <Text style={globalStyles.white}>Series</Text>
+                    <Text style={colorWhite}>Series</Text>
                 </TouchableOpacity>
             </Left>
         </Header>

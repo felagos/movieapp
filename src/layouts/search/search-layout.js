@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { Container, Grid } from 'native-base';
-import globalStyles from '../../styles/styles';
+import { backgroundColorBlack } from '../../styles/styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
 
 const SearchLayout = props => {
     return (
-        <SafeAreaView style={[styles.container, globalStyles.container]}>
-            <Container style={[globalStyles.container]}>
+        <SafeAreaView style={[styles.container, backgroundColorBlack]}>
+            <Container style={backgroundColorBlack}>
                 {props.header}
                 <Grid>
 

@@ -7,7 +7,7 @@ import Movies from './screens/movies';
 import MovieDetail from './screens/movie-detail';
 import Series from './screens/series';
 import IconWidget from './widgets/icon-widget';
-import globalStyles from './styles/styles';
+import { tabNavigation } from './styles/styles';
 
 const HomeStack = createStackNavigator(
     {
@@ -50,9 +50,9 @@ const TabRoot = createBottomTabNavigator(
             },
         }),
         tabBarOptions: {
-            activeTintColor: globalStyles.tabNavigation.color,
+            activeTintColor: tabNavigation.color,
             style: {
-                backgroundColor: globalStyles.tabNavigation.backgroundColor,
+                backgroundColor: tabNavigation.backgroundColor,
             }
         }
     }

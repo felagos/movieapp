@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
 import SeriesService from '../../services/series-service';
 import TopRated from '../components/top-rated';
-import globalStyles from '../../styles/styles';
+import { colorWhite } from '../../styles/styles';
 
 class SeriesList extends Component {
 
@@ -23,7 +23,7 @@ class SeriesList extends Component {
     render() {
         const { series } = this.state;
         if (series.length === 0) {
-            return <BarIndicator color={globalStyles.white.color} />
+            return <BarIndicator color={colorWhite.color} />
         }
         return (
             <FlatList

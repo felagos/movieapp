@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, ScrollView, StyleSheet, Text } from 'react-native';
 import { Grid, Col, Row } from 'native-base';
-import globalStyles from '../../styles/styles';
+import { backgroundColorBlack, colorWhite } from '../../styles/styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
 const HomeLayout = props => {
     return (
-        <SafeAreaView style={[styles.container, globalStyles.container]}>
+        <SafeAreaView style={[styles.container, backgroundColorBlack]}>
             <ScrollView>
                 <Grid>
                     <Row>
@@ -35,7 +35,7 @@ const HomeLayout = props => {
                     <Row style={styles.magin20}>
                         <Col size={100}>
                             <View style={styles.containerRow}>
-                                <Text style={[styles.title, globalStyles.titleSection]}>Películas populares</Text>
+                                <Text style={[styles.title, colorWhite]}>Películas populares</Text>
                                 {props.movieComponent}
                             </View>
                         </Col>
@@ -43,7 +43,7 @@ const HomeLayout = props => {
                     <Row style={styles.magin20}>
                         <Col size={100}>
                             <View style={styles.containerRow}>
-                                <Text style={[styles.title, globalStyles.titleSection]}>Series populares</Text>
+                                <Text style={[styles.title, colorWhite]}>Series populares</Text>
                                 {props.serieComponent}
                             </View>
                         </Col>

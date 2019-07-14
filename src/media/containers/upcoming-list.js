@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import { Platform } from 'react-native';
+import { Platform, Dimensions, View, Alert } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { BarIndicator } from 'react-native-indicators';
 import MoviesService from '../../services/movie-service';
 import UpcomingCover from '../components/upcoming-cover';
-import globalStyles from '../../styles/styles';
+import { colorWhite } from '../../styles/styles';
 import { youtubeAndroid, youtubeIOS } from '../../util/youtube';
 import { dangerToast } from '../../util/toast';
 
 class UpcomingMoviesList extends Component {
 
     state = {
-        movies: []
+        movies: [],
+        viewport: {
+            width: Dimensions.get('window').width,
+        }
     };
 
     async componentDidMount() {
@@ -27,6 +30,7 @@ class UpcomingMoviesList extends Component {
         const videoIds = await MoviesService.getMovieTrailer(id);
 
         if (videoIds.length === 0) {
+            Alert.alert("", "No se encontraron videos disponibles");
             dangerToast("No se encontraron videos disponibles");
         }
 
@@ -40,19 +44,30 @@ class UpcomingMoviesList extends Component {
         }
     }
 
+    handleRotation = () => {
+        this.setState({
+            viewport: {
+                width: Dimensions.get('window').width
+            }
+        });
+    }
+
     render() {
-        const { movies } = this.state;
+        const { movies, viewport: { width } } = this.state;
         if (movies.length === 0) {
-            return <BarIndicator color={globalStyles.white.color} />
+            return <BarIndicator color={colorWhite.color} />
         }
         return (
-            <Carousel
-                ref={(c) => { this._carousel = c; }}
-                data={movies}
-                renderItem={this.renderItem}
-                itemWidth={399}
-                sliderWidth={399}
-            />
+            <View onLayout={this.handleRotation}>
+                <Carousel
+                    ref={(c) => { this._carousel = c; }}
+                    data={movies}
+                    renderItem={this.renderItem}
+                    itemWidth={400}
+                    sliderWidth={width}
+                    firstItem={1}
+                />
+            </View>
         );
     }
 
