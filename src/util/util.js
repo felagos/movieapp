@@ -12,10 +12,12 @@ export const getImage = (img, size) => {
 }
 
 export const cutString = (string, limit = 28) => {
-    if(string.length < 28) return string;
+    if (string.length < 28) return string;
     return string.substring(0, limit) + " ...";
 }
 
 export const concatGenres = genres => {
+    if (genres.length > 3)
+        genres = genres.slice(0, 3);
     return genres.join(" - ");
 }

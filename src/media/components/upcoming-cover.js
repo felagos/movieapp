@@ -1,34 +1,50 @@
 import React from 'react';
-import { StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, View } from 'react-native';
+import { CachedImage } from 'react-native-cached-image';
 import { Card, CardItem } from 'native-base';
 import { getImage, IMG_SIZE } from '../../util/util';
+import Icon from '../../widgets/icon-widget';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
     },
+    card: {
+        borderColor: "black"
+    },
     img: {
-        width: 400,
         height: 300,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        resizeMode: 'stretch'
     },
     imgPlay: {
         width: 200,
         height: 200,
         marginRight: 30
+    },
+    info: {
+        position: 'absolute',
+        bottom: 0,
+        right: 30,
+        alignItems: 'flex-end'
     }
 });
 
-const UpcomingCover = ({ item, openVideo }) => {
+const UpcomingCover = ({ item, openVideo, seeDetail, width }) => {
     return (
-        <Card>
+        <Card style={styles.card}>
             <CardItem cardBody>
-                <ImageBackground resizeMode="stretch" source={{ uri: `${getImage(item.poster_path, IMG_SIZE.original)}` }} style={styles.img}>
+                <CachedImage source={{ uri: `${getImage(item.poster_path, IMG_SIZE.original)}` }} style={[styles.img, { width }]}>
                     <TouchableOpacity onPress={() => { openVideo(item.id); }}>
                         <Image style={styles.imgPlay} source={require('../../assets/icon-play.png')} />
                     </TouchableOpacity>
-                </ImageBackground>
+                    <View style={styles.info}>
+                        <TouchableOpacity onPress={() => seeDetail(item.id, item.title)}>
+                            <Icon name="info-circle" color="white" size={30} />
+                        </TouchableOpacity>
+                    </View>
+                </CachedImage>
             </CardItem>
         </Card>
     );

@@ -7,6 +7,7 @@ import UpcomingCover from '../components/upcoming-cover';
 import { colorWhite } from '../../styles/styles';
 import { youtubeAndroid, youtubeIOS } from '../../util/youtube';
 import { dangerToast } from '../../util/toast';
+import { withNavigation } from 'react-navigation';
 
 class UpcomingMoviesList extends Component {
 
@@ -23,14 +24,13 @@ class UpcomingMoviesList extends Component {
     }
 
     renderItem = ({ item }) => {
-        return <UpcomingCover item={item} openVideo={this.openVideo} />
+        return <UpcomingCover item={item} openVideo={this.openVideo} seeDetail={this.seeDetail} width={this.state.viewport.width} />
     }
 
     openVideo = async (id) => {
         const videoIds = await MoviesService.getMovieTrailer(id);
 
         if (videoIds.length === 0) {
-            Alert.alert("", "No se encontraron videos disponibles");
             dangerToast("No se encontraron videos disponibles");
         }
 
@@ -52,6 +52,10 @@ class UpcomingMoviesList extends Component {
         });
     }
 
+    seeDetail = (id, title) => {
+        this.props.navigation.navigate("MovieDetail", { id, title });
+    }
+
     render() {
         const { movies, viewport: { width } } = this.state;
         if (movies.length === 0) {
@@ -63,7 +67,7 @@ class UpcomingMoviesList extends Component {
                     ref={(c) => { this._carousel = c; }}
                     data={movies}
                     renderItem={this.renderItem}
-                    itemWidth={400}
+                    itemWidth={width}
                     sliderWidth={width}
                     firstItem={1}
                 />
@@ -73,4 +77,4 @@ class UpcomingMoviesList extends Component {
 
 }
 
-export default UpcomingMoviesList;
+export default withNavigation(UpcomingMoviesList);

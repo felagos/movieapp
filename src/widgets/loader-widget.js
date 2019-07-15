@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Modal, ActivityIndicator, Text } from 'react-native';
 
-const LoaderWidget = ({ loading = false, color, size, opacity = 0.4, text }) => {
+const LoaderWidget = ({ loading = false, size="small", color="#e50914", opacity = 0.4, text }) => {
     return (
         <Modal
             transparent

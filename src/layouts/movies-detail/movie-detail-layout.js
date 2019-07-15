@@ -1,7 +1,6 @@
 import React from 'react';
-import { SafeAreaView, View, ScrollView, StyleSheet, Text } from 'react-native';
-import { Grid, Col, Row } from 'native-base';
-import { backgroundColorBlack, colorWhite } from '../../styles/styles';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { backgroundColorBlack } from '../../styles/styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -16,8 +15,7 @@ const HomeLayout = props => {
     return (
         <SafeAreaView style={[styles.container, backgroundColorBlack]}>
             <ScrollView>
-                <Grid>
-                </Grid>
+                {props.children}
             </ScrollView>
         </SafeAreaView>
     );

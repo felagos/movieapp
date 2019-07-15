@@ -3,6 +3,8 @@ import Header from '../layouts/movies-detail/header';
 import MoviesDetailLayout from '../layouts/movies-detail/movie-detail-layout';
 import MovieService from '../services/movie-service';
 import * as Toast from '../util/toast';
+import Loader from '../widgets/loader-widget';
+import MovieDetailView from '../media/containers/movie-detail';
 
 class MoviesDetail extends Component {
 
@@ -35,7 +37,9 @@ class MoviesDetail extends Component {
     render() {
         const { movie } = this.state;
         return (
-            <MoviesDetailLayout movie={movie}>
+            <MoviesDetailLayout>
+                {movie === null && <Loader loading text="Cargando película ..." />}
+                {movie !== null && <MovieDetailView movie={movie} />}
             </MoviesDetailLayout>
         );
     }
