@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Header, Left, Text } from 'native-base';
-import { backgroundColorBlack, colorWhite, statusBar } from '../../styles/styles';
+import { backgroundColorBlack, colorWhite } from '../../styles/styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
 const HomeHeader = props => {
     return (
         <Header style={[styles.container, backgroundColorBlack]} transparent>
-            <StatusBar backgroundColor={statusBar.backgroundColor} barStyle="light-content" />
             <Image source={require('../../assets/movie-icon.png')} style={styles.icon} />
             <Left style={styles.left}>
                 <TouchableOpacity onPress={() => { props.goToMovies() }} style={styles.series}>

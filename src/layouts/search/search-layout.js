@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { StyleSheet, SafeAreaView, View, StatusBar } from 'react-native';
 import { backgroundColorBlack } from '../../styles/styles';
 
 const styles = StyleSheet.create({
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 const SearchLayout = props => {
     return (
         <SafeAreaView style={[styles.container, backgroundColorBlack]}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
             <View style={styles.container}>
                 {props.header}
             </View>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StatusBar } from 'react-native';
 import HomeLayout from '../layouts/home/home-layout';
 import HomeHeader from '../layouts/home/header';
 import SeriesList from '../media/containers/series-list';
@@ -64,6 +65,7 @@ class Home extends Component {
 
     render() {
         const { upcoming, series, movies } = this.state;
+        StatusBar.setBackgroundColor('#221f1f', true);
         return (
             <HomeLayout
                 upcomingComponent={
