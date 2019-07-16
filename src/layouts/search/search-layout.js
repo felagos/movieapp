@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
-import { Container, Grid } from 'native-base';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
 import { backgroundColorBlack } from '../../styles/styles';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'column',
         paddingLeft: 5,
         paddingRight: 5
     }
@@ -14,12 +14,9 @@ const styles = StyleSheet.create({
 const SearchLayout = props => {
     return (
         <SafeAreaView style={[styles.container, backgroundColorBlack]}>
-            <Container style={backgroundColorBlack}>
+            <View style={styles.container}>
                 {props.header}
-                <Grid>
-
-                </Grid>
-            </Container>
+            </View>
         </SafeAreaView>
     );
 }

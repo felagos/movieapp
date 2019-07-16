@@ -4,5 +4,6 @@ export const config = {
     API_BASE: "https://api.themoviedb.org/3",
     LANG: "es_ES",
     BASE_IMG: "https://image.tmdb.org/t/p",
-    GOOGLE_API_KEY: "AIzaSyDv8ck3ivxgGgoAY9s1onG1zcRKQMfgGOo"
+    GOOGLE_API_KEY: "AIzaSyDv8ck3ivxgGgoAY9s1onG1zcRKQMfgGOo",
+    IMDB_URL: 'https://www.imdb.com/title'
 };

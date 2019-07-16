@@ -21,3 +21,7 @@ export const concatGenres = genres => {
         genres = genres.slice(0, 3);
     return genres.join(" - ");
 }
+
+export const imdbUrl = id => {
+    return `${config.IMDB_URL}/${id}`;
+}
