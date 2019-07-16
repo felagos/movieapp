@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Share } from 'react-native';
 import { imdbUrl } from '../util/util';
-import Header from '../layouts/movies-detail/header';
-import MoviesDetailLayout from '../layouts/movies-detail/movie-detail-layout';
+import Header from '../layouts/media-detail/header';
+import MediaDetailLayout from '../layouts/media-detail/media-detail-layout';
 import MovieService from '../services/movie-service';
 import * as Toast from '../util/toast';
 import Loader from '../widgets/loader-widget';
@@ -51,10 +51,10 @@ class MoviesDetail extends Component {
     render() {
         const { movie } = this.state;
         return (
-            <MoviesDetailLayout>
+            <MediaDetailLayout>
                 {movie === null && <Loader loading text="Cargando película ..." />}
                 {movie !== null && <MovieDetailView movie={movie} share={this.share} handleMyList={this.handleMyList} />}
-            </MoviesDetailLayout>
+            </MediaDetailLayout>
         );
     }
 }

@@ -16,9 +16,8 @@ export const cutString = (string, limit = 28) => {
     return string.substring(0, limit) + " ...";
 }
 
-export const concatGenres = genres => {
-    if (genres.length > 3)
-        genres = genres.slice(0, 3);
+export const concatGenres = (genres, limit = 3) => {
+    genres = genres.slice(0, limit);
     return genres.join(" - ");
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Header, Left, Button, Title } from 'native-base';
-import Icon from '../../widgets/icon-widget';
 import { backgroundColorBlack, colorRed } from '../../styles/styles';
+import Icon from '../../widgets/icon-widget';
 
 const styles = StyleSheet.create({
     containerTile: {

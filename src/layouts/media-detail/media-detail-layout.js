@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const HomeLayout = props => {
+const MediaDetailLayout = props => {
     return (
         <SafeAreaView style={[styles.container, backgroundColorBlack]}>
             <ScrollView>
@@ -21,4 +21,4 @@ const HomeLayout = props => {
     );
 }
 
-export default HomeLayout;
+export default MediaDetailLayout;

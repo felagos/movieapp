@@ -1,9 +1,8 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'native-base';
-import { CachedImage } from 'react-native-cached-image';
 import { getImage, IMG_SIZE, concatGenres } from '../../util/util';
-import { backgroundColorBlack, colorWhite, colorRed, backgroundColorRed } from '../../styles/styles';
+import { backgroundColorBlack, colorWhite, backgroundColorRed } from '../../styles/styles';
 import Icon from '../../widgets/icon-widget';
 import CoverTitle from '../components/cover-title';
 
