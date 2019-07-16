@@ -5,6 +5,7 @@ import { CachedImage } from 'react-native-cached-image';
 import { getImage, IMG_SIZE, concatGenres } from '../../util/util';
 import { backgroundColorBlack, colorWhite, colorRed, backgroundColorRed } from '../../styles/styles';
 import Icon from '../../widgets/icon-widget';
+import CoverTitle from '../components/cover-title';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,19 +14,6 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         ...backgroundColorBlack,
         flexDirection: 'column'
-    },
-    img: {
-        width: Dimensions.get("window").width,
-        height: 200,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    titleCover: {
-        ...colorWhite,
-        fontSize: 18,
-        textShadowColor: colorRed.color,
-        textShadowRadius: 10,
-        top: 85
     },
     overview: {
         ...colorWhite,
@@ -55,9 +43,7 @@ const MovieDetail = ({ movie, share, handleMyList }) => {
     return (
         <View style={styles.container}>
             <View>
-                <CachedImage style={styles.img} source={{ uri: getImage(movie.backdrop_path, IMG_SIZE.original) }}>
-                    <Text style={styles.titleCover}>{concatGenres(movie.genres)}</Text>
-                </CachedImage>
+                <CoverTitle uri={getImage(movie.backdrop_path, IMG_SIZE.original)} title={concatGenres(movie.genres)} />
             </View>
             <View style={styles.buttonContainer}>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => handleMyList(movie.id)}>

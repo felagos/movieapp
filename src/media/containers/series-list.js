@@ -1,30 +1,22 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
-import SeriesService from '../../services/series-service';
-import TopRated from '../components/top-rated';
 import { colorWhite } from '../../styles/styles';
+import TopRated from '../components/top-rated-cover';
 
-class SeriesList extends Component {
-
-    state = {
-        series: []
-    };
-
-    async componentDidMount() {
-        const series = await SeriesService.getTopRated();
-        this.setState({ series });
-    }
+class SeriesList extends PureComponent {
 
     renderItem = ({ item }) => {
         return <TopRated item={item} media="tv" seeDetail={this.props.seeDetail} />
     }
 
     render() {
-        const { series } = this.state;
+        const { series } = this.props;
+
         if (series.length === 0) {
             return <BarIndicator color={colorWhite.color} />
         }
+
         return (
             <FlatList
                 horizontal

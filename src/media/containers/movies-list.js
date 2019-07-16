@@ -1,30 +1,22 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
-import MoviesService from '../../services/movie-service';
-import TopRated from '../components/top-rated';
 import { colorWhite } from '../../styles/styles';
+import TopRated from '../components/top-rated-cover';
 
-class MovieList extends Component {
-
-    state = {
-        movies: []
-    };
-
-    async componentDidMount() {
-        const movies = await MoviesService.getTopRated();
-        this.setState({ movies });
-    }
+class MovieList extends PureComponent {
 
     renderItem = ({ item }) => {
         return <TopRated item={item} media="film" seeDetail={this.props.seeDetail} />
     }
 
     render() {
-        const { movies } = this.state;
+        const { movies } = this.props;
+
         if (movies.length === 0) {
             return <BarIndicator color={colorWhite.color} />
         }
+
         return (
             <FlatList
                 horizontal

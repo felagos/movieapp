@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Share } from 'react-native'
+import { Share } from 'react-native';
+import { imdbUrl } from '../util/util';
 import Header from '../layouts/movies-detail/header';
 import MoviesDetailLayout from '../layouts/movies-detail/movie-detail-layout';
 import MovieService from '../services/movie-service';
 import * as Toast from '../util/toast';
 import Loader from '../widgets/loader-widget';
 import MovieDetailView from '../media/containers/movie-detail';
-import { imdbUrl } from '../util/util';
 
 class MoviesDetail extends Component {
 

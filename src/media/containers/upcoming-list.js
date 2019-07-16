@@ -1,27 +1,21 @@
-import React, { Component } from 'react';
-import { Platform, Dimensions, View, Alert } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import React, { PureComponent } from 'react';
+import { Platform, Dimensions, View } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
-import MoviesService from '../../services/movie-service';
-import UpcomingCover from '../components/upcoming-cover';
 import { colorWhite } from '../../styles/styles';
 import { youtubeAndroid, youtubeIOS } from '../../util/youtube';
 import { dangerToast } from '../../util/toast';
 import { withNavigation } from 'react-navigation';
+import Carousel from 'react-native-snap-carousel';
+import MoviesService from '../../services/movie-service';
+import UpcomingCover from '../components/upcoming-cover';
 
-class UpcomingMoviesList extends Component {
+class UpcomingMoviesList extends PureComponent {
 
     state = {
-        movies: [],
         viewport: {
             width: Dimensions.get('window').width,
         }
     };
-
-    async componentDidMount() {
-        const movies = await MoviesService.getUpcoming();
-        this.setState({ movies });
-    }
 
     renderItem = ({ item }) => {
         return <UpcomingCover item={item} openVideo={this.openVideo} seeDetail={this.seeDetail} width={this.state.viewport.width} />
@@ -57,15 +51,18 @@ class UpcomingMoviesList extends Component {
     }
 
     render() {
-        const { movies, viewport: { width } } = this.state;
-        if (movies.length === 0) {
+        const { viewport: { width } } = this.state;
+        const { upcoming } = this.props;
+
+        if (upcoming.length === 0) {
             return <BarIndicator color={colorWhite.color} />
         }
+
         return (
             <View onLayout={this.handleRotation}>
                 <Carousel
                     ref={(c) => { this._carousel = c; }}
-                    data={movies}
+                    data={upcoming}
                     renderItem={this.renderItem}
                     itemWidth={width}
                     sliderWidth={width}

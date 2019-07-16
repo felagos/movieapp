@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import HomeLayout from '../layouts/home/home-layout';
 import HomeHeader from '../layouts/home/header';
-import SeriesList from '../media/containers/series-list-top-rated';
-import MovieList from '../media/containers/movies-list-top-rated';
+import SeriesList from '../media/containers/series-list';
+import MovieList from '../media/containers/movies-list';
 import UpcomingMoviesList from '../media/containers/upcoming-list';
 
+import MoviesService from '../services/movie-service';
+import SeriesService from '../services/series-service';
+
 class Home extends Component {
+
+    state = {
+        upcoming: [],
+        series: [],
+        movies: []
+    };
 
     static navigationOptions = ({ navigation }) => {
         const goToMovies = navigation.getParam("goToMovies", () => { });
@@ -20,6 +29,21 @@ class Home extends Component {
             goToMovies: this.goToMovies,
             goToSeries: this.gotToSeries
         });
+    }
+
+    componentDidMount() {
+        MoviesService.getUpcoming().then(upcoming => {
+            this.setState({ upcoming });
+        });
+
+        MoviesService.getTopRated().then(movies => {
+            this.setState({ movies });
+        });
+
+        SeriesService.getTopRated().then(series => {
+            this.setState({ series });
+        });
+
     }
 
     gotToSeries = () => {
@@ -39,16 +63,17 @@ class Home extends Component {
     }
 
     render() {
+        const { upcoming, series, movies } = this.state;
         return (
             <HomeLayout
                 upcomingComponent={
-                    <UpcomingMoviesList />
+                    <UpcomingMoviesList upcoming={upcoming} />
                 }
                 serieComponent={
-                    <SeriesList seeDetail={this.seeDetailSerie} />
+                    <SeriesList seeDetail={this.seeDetailSerie} series={series} />
                 }
                 movieComponent={
-                    <MovieList seeDetail={this.seeDetailMovie} />
+                    <MovieList seeDetail={this.seeDetailMovie} movies={movies} />
                 }
             />
 
