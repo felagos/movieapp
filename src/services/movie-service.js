@@ -38,7 +38,13 @@ class MovieService {
         movie.genres = movie.genres.map(genre => genre.name);
 
         return movie;
+    }
 
+    async doSearch(term, page = 1) {
+        const url = `${config.API_BASE}/search/movie?api_key=${config.API_KEY}&language=${config.LANG}&query=${term}&page=${page}`;
+        const { data: results } = await axios.get(url);
+
+        return results;
     }
 
 }

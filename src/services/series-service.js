@@ -57,6 +57,13 @@ class SerieService {
         return response;
     }
 
+    async doSearch(term, page = 1) {
+        const url = `${config.API_BASE}/search/tv?api_key=${config.API_KEY}&language=${config.LANG}&query=${term}&page=${page}`;
+        const { data: results } = await axios.get(url);
+
+        return results;
+    }
+
 }
 
 export default new SerieService();

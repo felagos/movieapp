@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 import SearchLayout from '../layouts/search/search-layout';
 import HeaderSearch from '../layouts/search/header';
+import MovieService from '../services/movie-service';
+import SerieService from '../services/series-service';
+import SearchWrapper from '../media/containers/search-list';
 
 class Search extends Component {
 
     state = {
-        iconLoading: false
+        iconLoading: false,
+        movies: [],
+        series: []
     };
 
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = () => {
         return {
             header: null,
         }
@@ -21,20 +26,29 @@ class Search extends Component {
         });
     }
 
-    search = async text => {
-        this.setState({ iconLoading: true });
-        setTimeout(() => {
-            this.setState({ iconLoading: false });
-        }, 10000)
+    search = async term => {
+        this.setState({ iconLoading: true }, () => {
+            const pMovie = MovieService.doSearch(term);
+            const pSerie = SerieService.doSearch(term);
+
+            Promise.all([pMovie, pSerie]).then(response => {
+                const movies = response[0];
+                const series = response[1];
+
+                this.setState({movies, series, iconLoading: false});
+            });
+
+        });
     }
 
     render() {
-        const { iconLoading } = this.state;
+        const { iconLoading, movies, series } = this.state;
         StatusBar.setBackgroundColor('#221f1f', true);
         return (
-            <SearchLayout
-                header={<HeaderSearch search={this.search} iconLoading={iconLoading} />}
-            />
+            <SearchLayout>
+                <HeaderSearch search={this.search} iconLoading={iconLoading} />
+                <SearchWrapper movies={movies} series={series} />
+            </SearchLayout>
 
         );
     }
