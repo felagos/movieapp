@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const TopRated = ({ item, seeDetail, media }) => {
+const CoverMedia = ({ item, seeDetail, media }) => {
     const title = item.original_name ? item.original_name : item.title;
     return (
         <View style={styles.card}>
@@ -40,4 +40,4 @@ const TopRated = ({ item, seeDetail, media }) => {
     );
 }
 
-export default TopRated;
+export default CoverMedia;

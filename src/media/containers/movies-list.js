@@ -3,12 +3,12 @@ import { FlatList } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { BarIndicator } from 'react-native-indicators';
 import { colorWhite } from '../../styles/styles';
-import TopRated from '../components/top-rated-cover';
+import CoverMedia from '../components/cover-media';
 
 class MovieList extends PureComponent {
 
     renderItem = ({ item }) => {
-        return <TopRated item={item} media="film" seeDetail={this.seeDetailMovie} />
+        return <CoverMedia item={item} media="film" seeDetail={this.seeDetailMovie} />
     }
 
     seeDetailMovie = (id, media, title) => {
