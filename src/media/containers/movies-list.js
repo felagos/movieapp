@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { BarIndicator } from 'react-native-indicators';
 import { colorWhite } from '../../styles/styles';
 import TopRated from '../components/top-rated-cover';
@@ -7,11 +8,15 @@ import TopRated from '../components/top-rated-cover';
 class MovieList extends PureComponent {
 
     renderItem = ({ item }) => {
-        return <TopRated item={item} media="film" seeDetail={this.props.seeDetail} />
+        return <TopRated item={item} media="film" seeDetail={this.seeDetailMovie} />
+    }
+
+    seeDetailMovie = (id, media, title) => {
+        this.props.navigation.navigate("MovieDetail", { id, media, title });
     }
 
     render() {
-        const { movies } = this.props;
+        const { movies, horizontal } = this.props;
 
         if (movies.length === 0) {
             return <BarIndicator color={colorWhite.color} />
@@ -19,7 +24,7 @@ class MovieList extends PureComponent {
 
         return (
             <FlatList
-                horizontal
+                horizontal={horizontal}
                 data={movies}
                 keyExtractor={i => i.id.toString()}
                 renderItem={this.renderItem}
@@ -29,4 +34,4 @@ class MovieList extends PureComponent {
 
 }
 
-export default MovieList;
+export default withNavigation(MovieList);

@@ -55,14 +55,6 @@ class Home extends Component {
         this.props.navigation.navigate("Movies");
     }
 
-    seeDetailMovie = (id, media, title) => {
-        this.props.navigation.navigate("MovieDetail", { id, media, title });
-    }
-
-    seeDetailSerie = (id, media, title) => {
-        this.props.navigation.navigate("SerieDetail", { id, media, title });
-    }
-
     render() {
         const { upcoming, series, movies } = this.state;
         StatusBar.setBackgroundColor('#221f1f', true);
@@ -72,10 +64,10 @@ class Home extends Component {
                     <UpcomingMoviesList upcoming={upcoming} />
                 }
                 serieComponent={
-                    <SeriesList seeDetail={this.seeDetailSerie} series={series} />
+                    <SeriesList horizontal series={series} />
                 }
                 movieComponent={
-                    <MovieList seeDetail={this.seeDetailMovie} movies={movies} />
+                    <MovieList horizontal movies={movies} />
                 }
             />
 
