@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
-import { Text, Button, Item, Picker } from 'native-base';
+import { StyleSheet, View, FlatList, Picker } from 'react-native';
+import { Text, Button, Item } from 'native-base';
 import { getImage, IMG_SIZE, concatGenres } from '../../util/util';
 import { backgroundColorBlack, colorWhite, backgroundColorRed } from '../../styles/styles';
 import Icon from '../../widgets/icon-widget';
@@ -39,13 +39,12 @@ const styles = StyleSheet.create({
     picker: {
         flex: 1,
         ...colorWhite,
-        ...backgroundColorRed,
-        borderColor: 'black'
+        ...backgroundColorRed
     }
 });
 
 const SerieDetail = ({ serie, share, handleMyList, handleChangeSeason, seasonSelected, episodes, renderEpisodes }) => {
-    console.log(episodes);
+
     return (
         <View style={styles.container}>
             <View>
@@ -66,22 +65,20 @@ const SerieDetail = ({ serie, share, handleMyList, handleChangeSeason, seasonSel
             </View>
 
             <View style={styles.subContainer}>
-                <Item picker>
-                    <Picker
-                        mode="dialog"
-                        placeholder="Temporadas"
-                        style={styles.picker}
-                        selectedValue={`${seasonSelected}-${serie.id}`}
-                        onValueChange={handleChangeSeason}
-                    >
-                        <Picker.Item label="Ver temporadas" value="" />
-                        {
-                            serie.seasons.map((season, index) => (
-                                <Picker.Item key={index} label={season.name} value={`${season.number}-${serie.id}`} />
-                            ))
-                        }
-                    </Picker>
-                </Item>
+                <Picker
+                    mode="modal"
+                    placeholder="Temporadas"
+                    style={styles.picker}
+                    selectedValue={`${seasonSelected}-${serie.id}`}
+                    onValueChange={handleChangeSeason}
+                >
+                    <Picker.Item label="Ver temporadas" value="" />
+                    {
+                        serie.seasons.map((season, index) => (
+                            <Picker.Item key={index} label={season.name} value={`${season.number}-${serie.id}`} />
+                        ))
+                    }
+                </Picker>
             </View>
 
             {
