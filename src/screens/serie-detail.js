@@ -14,7 +14,8 @@ class SerieDetail extends Component {
     state = {
         serie: null,
         seasonSelected: "",
-        episodes: []
+        episodes: [],
+        loading: true
     };
 
     static navigationOptions = ({ navigation }) => {
@@ -31,9 +32,9 @@ class SerieDetail extends Component {
                 const id = this.props.navigation.getParam("id");
                 const serie = await SerieService.getDetail(id);
 
-                this.setState({ serie });
+                this.setState({ serie, loading: false });
             } catch (err) {
-                alert(err)
+                this.setState({ serie: [], loading: false });
                 Toast.dangerToast("Error al obtener la película seleccionada");
             }
         });
@@ -59,7 +60,7 @@ class SerieDetail extends Component {
         else {
             const values = value.split("-");
             const season = values[0];
-            const idSerie = values[1]
+            const idSerie = values[1];
 
             const episodes = await SerieService.getEpisodesBySeason(idSerie, season);
 
@@ -72,12 +73,12 @@ class SerieDetail extends Component {
     }
 
     render() {
-        let { serie, seasonSelected, episodes } = this.state;
+        const { serie, seasonSelected, episodes, loading } = this.state;
 
         return (
             <MediaDetailLayout>
-                {serie === null && <Loader loading text="Cargando serie ..." />}
-                {serie !== null && <SerieDetailView renderEpisodes={this.renderEpisodes} episodes={episodes} seasonSelected={seasonSelected} serie={serie} share={this.share} handleMyList={this.handleMyList} handleChangeSeason={this.handleChangeSeason} />}
+                <Loader loading={loading} text="Cargando serie ..." />
+                {!loading && <SerieDetailView renderEpisodes={this.renderEpisodes} episodes={episodes} seasonSelected={seasonSelected} serie={serie} share={this.share} handleMyList={this.handleMyList} handleChangeSeason={this.handleChangeSeason} />}
             </MediaDetailLayout>
         );
     }

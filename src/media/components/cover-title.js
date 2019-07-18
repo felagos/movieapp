@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 const CoverTitle = ({ uri, title }) => {
     return (
         <CachedImage style={styles.img} source={uri}>
-            <Text style={styles.titleCover}>{title ? title : 'Resumen no disponible'}</Text>
+            {title && <Text style={styles.titleCover}>{title}</Text>}
         </CachedImage>
     );
 }

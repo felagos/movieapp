@@ -11,7 +11,8 @@ import MovieDetailView from '../media/containers/movie-detail';
 class MoviesDetail extends Component {
 
     state = {
-        movie: null
+        movie: null,
+        loading: true
     };
 
     static navigationOptions = ({ navigation }) => {
@@ -28,8 +29,9 @@ class MoviesDetail extends Component {
                 const id = this.props.navigation.getParam("id");
                 const movie = await MovieService.getDetail(id);
 
-                this.setState({ movie });
+                this.setState({ movie, loading: false });
             } catch (err) {
+                this.setState({ movie: [], loading: false });
                 Toast.dangerToast("Error al obtener la película seleccionada");
             }
         });
@@ -49,11 +51,11 @@ class MoviesDetail extends Component {
     }
 
     render() {
-        const { movie } = this.state;
+        const { movie, loading } = this.state;
         return (
             <MediaDetailLayout>
-                {movie === null && <Loader loading text="Cargando película ..." />}
-                {movie !== null && <MovieDetailView movie={movie} share={this.share} handleMyList={this.handleMyList} />}
+                <Loader loading={loading} text="Cargando película ..." />
+                {!loading && <MovieDetailView movie={movie} share={this.share} handleMyList={this.handleMyList} />}
             </MediaDetailLayout>
         );
     }
