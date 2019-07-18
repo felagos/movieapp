@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     },
     tab: {
         flex: 1
+    },
+    tabHeader: {
+        ...backgroundColorRed
     }
 });
 
@@ -19,11 +22,11 @@ const SearchList = ({ movies, series }) => {
 
     return (
         <Content style={styles.container}>
-            <Tabs >
-                <Tab tabStyle={styles.tab} heading={<TabHeading style={{...backgroundColorRed}}><Icon color={colorWhite.color} size={20} name="film" /><Text>Películas</Text></TabHeading>}>
+            <Tabs>
+                <Tab tabStyle={styles.tab} heading={<TabHeading style={styles.tabHeader}><Icon color={colorWhite.color} size={20} name="film" /><Text>Películas</Text></TabHeading>}>
                     <MovieList columns={2} loading={false} horizontal={false} movies={movies} />
                 </Tab>
-                <Tab tabStyle={styles.tab} heading={<TabHeading style={{...backgroundColorRed}}><Icon color={colorWhite.color} size={20} name="tv" /><Text>Series</Text></TabHeading>}>
+                <Tab tabStyle={styles.tab} heading={<TabHeading style={styles.tabHeader}><Icon color={colorWhite.color} size={20} name="tv" /><Text>Series</Text></TabHeading>}>
                     <SerieList columns={2} loading={false} horizontal={false} series={series} />
                 </Tab>
             </Tabs>

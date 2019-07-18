@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         height: 250,
-        width: 200
+        width: 200,
+        padding: 5
     },
     cardBody: {
         flexDirection: 'column'

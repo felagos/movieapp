@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, FlatList, Picker } from 'react-native';
-import { Text, Button, Item } from 'native-base';
-import { getImage, IMG_SIZE, concatGenres } from '../../util/util';
+import { Text, Button } from 'native-base';
+import { concatGenres, getImageObject } from '../../util/util';
 import { backgroundColorBlack, colorWhite, backgroundColorRed } from '../../styles/styles';
 import Icon from '../../widgets/icon-widget';
 import CoverTitle from '../components/cover-title';
@@ -45,14 +45,10 @@ const styles = StyleSheet.create({
 
 const SerieDetail = ({ serie, share, handleMyList, handleChangeSeason, seasonSelected, episodes, renderEpisodes }) => {
 
-    let img =  require('../../assets/no_disponible.jpg');
-    if(img.backdrop_path) img = { uri: `${getImage(serie.backdrop_path, IMG_SIZE.original)}` };
-    else if(img.poster_path) img = { uri: `${getImage(serie.poster_path, IMG_SIZE.original)}` };
-
     return (
         <View style={styles.container}>
             <View>
-                <CoverTitle uri={img} title={concatGenres(serie.genres, 2)} />
+                <CoverTitle uri={getImageObject(serie)} title={concatGenres(serie.genres, 2)} />
             </View>
             <View style={styles.buttonContainer}>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => handleMyList(serie.id)}>

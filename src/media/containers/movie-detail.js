@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'native-base';
-import { getImage, IMG_SIZE, concatGenres } from '../../util/util';
+import { concatGenres, getImageObject } from '../../util/util';
 import { backgroundColorBlack, colorWhite, backgroundColorRed } from '../../styles/styles';
 import Icon from '../../widgets/icon-widget';
 import CoverTitle from '../components/cover-title';
@@ -39,14 +39,10 @@ const styles = StyleSheet.create({
 
 const MovieDetail = ({ movie, share, handleMyList }) => {
 
-    let img =  require('../../assets/no_disponible.jpg');
-    if(img.backdrop_path) img = { uri: `${getImage(movie.backdrop_path, IMG_SIZE.original)}` };
-    else if(img.poster_path) img = { uri: `${getImage(movie.poster_path, IMG_SIZE.original)}` };
-
     return (
         <View style={styles.container}>
             <View>
-                <CoverTitle uri={img} title={concatGenres(movie.genres)} />
+                <CoverTitle uri={getImageObject(movie)} title={concatGenres(movie.genres)} />
             </View>
             <View style={styles.buttonContainer}>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => handleMyList(movie.id)}>

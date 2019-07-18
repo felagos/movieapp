@@ -24,3 +24,9 @@ export const concatGenres = (genres, limit = 3) => {
 export const imdbUrl = id => {
     return `${config.IMDB_URL}/${id}`;
 }
+
+export const getImageObject = item => {
+    if (item.backdrop_path) return { uri: `${getImage(item.backdrop_path, IMG_SIZE.original)}` };
+    if (item.poster_path) return { uri: `${getImage(item.poster_path, IMG_SIZE.original)}` };
+    return require('../assets/no_disponible.jpg');
+}
