@@ -38,11 +38,15 @@ const styles = StyleSheet.create({
 });
 
 const MovieDetail = ({ movie, share, handleMyList }) => {
-    console.log(movie);
+
+    let img =  require('../../assets/no_disponible.jpg');
+    if(img.backdrop_path) img = { uri: `${getImage(movie.backdrop_path, IMG_SIZE.original)}` };
+    else if(img.poster_path) img = { uri: `${getImage(movie.poster_path, IMG_SIZE.original)}` };
+
     return (
         <View style={styles.container}>
             <View>
-                <CoverTitle uri={getImage(movie.backdrop_path, IMG_SIZE.original)} title={concatGenres(movie.genres)} />
+                <CoverTitle uri={img} title={concatGenres(movie.genres)} />
             </View>
             <View style={styles.buttonContainer}>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => handleMyList(movie.id)}>

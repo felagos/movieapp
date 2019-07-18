@@ -45,10 +45,14 @@ const styles = StyleSheet.create({
 
 const SerieDetail = ({ serie, share, handleMyList, handleChangeSeason, seasonSelected, episodes, renderEpisodes }) => {
 
+    let img =  require('../../assets/no_disponible.jpg');
+    if(img.backdrop_path) img = { uri: `${getImage(serie.backdrop_path, IMG_SIZE.original)}` };
+    else if(img.poster_path) img = { uri: `${getImage(serie.poster_path, IMG_SIZE.original)}` };
+
     return (
         <View style={styles.container}>
             <View>
-                <CoverTitle uri={getImage(serie.backdrop_path, IMG_SIZE.original)} title={concatGenres(serie.genres, 2)} />
+                <CoverTitle uri={img} title={concatGenres(serie.genres, 2)} />
             </View>
             <View style={styles.buttonContainer}>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => handleMyList(serie.id)}>

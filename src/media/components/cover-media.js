@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     card: {
         flex: 1,
         flexDirection: 'column',
-        margin: 5,
         height: 250,
         width: 200
     },
@@ -28,11 +27,13 @@ const styles = StyleSheet.create({
 
 const CoverMedia = ({ item, seeDetail, media }) => {
     const title = item.original_name ? item.original_name : item.title;
+    const img = !item.poster_path ? require('../../assets/no_disponible.jpg') : { uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` };
+    
     return (
         <View style={styles.card}>
             <TouchableOpacity onPress={() => { seeDetail(item.id, media, title); }}>
                 <View style={styles.cardBody}>
-                    <CachedImage style={styles.imageThumbnail} source={{ uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` }} />
+                    <CachedImage style={styles.imageThumbnail} source={img} />
                     <Text style={styles.title}>{cutString(title)}</Text>
                 </View>
             </TouchableOpacity>

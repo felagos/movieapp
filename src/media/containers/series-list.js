@@ -2,13 +2,13 @@ import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { BarIndicator } from 'react-native-indicators';
-import { colorWhite } from '../../styles/styles';
+import { colorWhite, backgroundColorBlack } from '../../styles/styles';
 import CoverMedia from '../components/cover-media';
 
 class SeriesList extends PureComponent {
 
     renderItem = ({ item }) => {
-        return <CoverMedia item={item} media="tv" seeDetail={this.seeDetailSerie} />
+        return <CoverMedia columns={this.props.columns} item={item} media="tv" seeDetail={this.seeDetailSerie} />
     }
 
     seeDetailSerie = (id, media, title) => {
@@ -16,14 +16,16 @@ class SeriesList extends PureComponent {
     }
 
     render() {
-        const { series, horizontal } = this.props;
+        const { series, horizontal, loading, columns } = this.props;
 
-        if (series.length === 0) {
+        if (series.length === 0 && loading) {
             return <BarIndicator color={colorWhite.color} />
         }
 
         return (
             <FlatList
+                numColumns={columns ? columns : 1}
+                contentContainerStyle={{ ...backgroundColorBlack }}
                 horizontal={horizontal}
                 data={series}
                 keyExtractor={i => i.id.toString()}

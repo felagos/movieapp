@@ -64,10 +64,10 @@ class Home extends Component {
                     <UpcomingMoviesList upcoming={upcoming} />
                 }
                 serieComponent={
-                    <SeriesList horizontal series={series} />
+                    <SeriesList loading horizontal series={series} />
                 }
                 movieComponent={
-                    <MovieList horizontal movies={movies} />
+                    <MovieList loading horizontal movies={movies} />
                 }
             />
 

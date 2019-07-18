@@ -1,33 +1,34 @@
 import React from 'react';
 import { Content, Tab, Tabs, TabHeading, Text } from 'native-base';
 import { StyleSheet } from 'react-native';
-
-import { backgroundColorBlack, backgroundColorRed, colorWhite, colorBlack } from '../../styles/styles';
-
+import { colorWhite, backgroundColorRed } from '../../styles/styles';
 import Icon from '../../widgets/icon-widget';
+import MovieList from '../containers/movies-list';
+import SerieList from '../containers/series-list';
 
 const styles = StyleSheet.create({
     container: {
-        ...backgroundColorBlack
+        flex: 1
     },
     tab: {
-        ...backgroundColorRed
+        flex: 1
     }
 });
 
-const SearchWrapper = ({ movies, series }) => {
-    console.log(movies)
-    console.log(series)
+const SearchList = ({ movies, series }) => {
+
     return (
         <Content style={styles.container}>
-            <Tabs>
-                <Tab heading={<TabHeading><Icon color={colorWhite.color} size={20} name="film" /><Text>Películas</Text></TabHeading>}>
+            <Tabs >
+                <Tab tabStyle={styles.tab} heading={<TabHeading style={{...backgroundColorRed}}><Icon color={colorWhite.color} size={20} name="film" /><Text>Películas</Text></TabHeading>}>
+                    <MovieList columns={2} loading={false} horizontal={false} movies={movies} />
                 </Tab>
-                <Tab activeTabStyle="red" heading={<TabHeading><Icon color={colorWhite.color} size={20} name="tv" /><Text>Series</Text></TabHeading>}>
+                <Tab tabStyle={styles.tab} heading={<TabHeading style={{...backgroundColorRed}}><Icon color={colorWhite.color} size={20} name="tv" /><Text>Series</Text></TabHeading>}>
+                    <SerieList columns={2} loading={false} horizontal={false} series={series} />
                 </Tab>
             </Tabs>
         </Content>
     );
 }
 
-export default SearchWrapper;
+export default SearchList;

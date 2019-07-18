@@ -20,6 +20,14 @@ const HomeStack = createStackNavigator(
     }
 );
 
+const SearchStack = createStackNavigator(
+    {
+        Search,
+        MovieDetail,
+        SerieDetail
+    }
+);
+
 const TabRoot = createBottomTabNavigator(
     {
         Home: {
@@ -27,7 +35,7 @@ const TabRoot = createBottomTabNavigator(
             navigationOptions: { title: 'Inicio' }
         },
         Search: {
-            screen: Search,
+            screen: SearchStack,
             navigationOptions: { title: 'Buscar' }
         },
         MyList: {

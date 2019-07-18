@@ -2,13 +2,13 @@ import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { BarIndicator } from 'react-native-indicators';
-import { colorWhite } from '../../styles/styles';
+import { colorWhite, backgroundColorBlack } from '../../styles/styles';
 import CoverMedia from '../components/cover-media';
 
 class MovieList extends PureComponent {
 
     renderItem = ({ item }) => {
-        return <CoverMedia item={item} media="film" seeDetail={this.seeDetailMovie} />
+        return <CoverMedia columns={this.props.columns} item={item} media="film" seeDetail={this.seeDetailMovie} />
     }
 
     seeDetailMovie = (id, media, title) => {
@@ -16,14 +16,16 @@ class MovieList extends PureComponent {
     }
 
     render() {
-        const { movies, horizontal } = this.props;
+        const { movies, horizontal, loading, columns } = this.props;
 
-        if (movies.length === 0) {
+        if (movies.length === 0 && loading) {
             return <BarIndicator color={colorWhite.color} />
         }
 
         return (
             <FlatList
+                contentContainerStyle={{ ...backgroundColorBlack }}
+                numColumns={columns ? columns : 1}
                 horizontal={horizontal}
                 data={movies}
                 keyExtractor={i => i.id.toString()}
