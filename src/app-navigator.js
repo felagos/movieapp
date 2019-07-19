@@ -1,9 +1,12 @@
 import React from 'react';
-import { createAppContainer, createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createAppContainer, createBottomTabNavigator, createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import Home from './screens/home';
 import Search from './screens/search';
 import MyList from './screens/my-list';
 import Movies from './screens/movies';
+import Login from './screens/login';
+import Register from './screens/register';
+import Loading from './screens/loading';
 import MovieDetail from './screens/movie-detail';
 import SerieDetail from './screens/serie-detail';
 import Series from './screens/series';
@@ -68,6 +71,24 @@ const TabRoot = createBottomTabNavigator(
     }
 );
 
-const AppNavigation = createAppContainer(TabRoot);
+const AuthStack = createStackNavigator(
+    {
+        Login,
+        Register
+    }
+);
+
+const AppRoot = createSwitchNavigator(
+    {
+        Loading,
+        SignOut: AuthStack,
+        SignIn: TabRoot
+    },
+    {
+        initialRouteName: "Loading"
+    }
+);
+
+const AppNavigation = createAppContainer(AppRoot);
 
 export default AppNavigation;
