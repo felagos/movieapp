@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
 });
 
 const MovieDetail = ({ movie, share, handleMyList }) => {
-
+    const iconName = movie.inMyList ? "ban" : "check";
+    
     return (
         <View style={styles.container}>
             <View>
@@ -46,11 +47,11 @@ const MovieDetail = ({ movie, share, handleMyList }) => {
             </View>
             <View style={styles.buttonContainer}>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => handleMyList(movie.id)}>
-                    <Icon name='check' color={colorWhite.color} style={styles.icon} />
+                    <Icon name={iconName} color={colorWhite.color} style={styles.icon} size={18} />
                     <Text>Mi Lista</Text>
                 </Button>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => share(movie.title, movie.imdb_id)}>
-                    <Icon name='share-alt' color={colorWhite.color} style={styles.icon} />
+                    <Icon name='share-alt' color={colorWhite.color} style={styles.icon} size={18} />
                     <Text>Compartir</Text>
                 </Button>
             </View>

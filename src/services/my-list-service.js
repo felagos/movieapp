@@ -1,25 +1,55 @@
 import Storage from '../services/storage-service';
 import { config } from '../config/config';
-import { STATUS_HTTP } from '../util/constants';
+import axios from 'axios';
 
 class MyListService {
 
     async saveToMyList(idMedia, mediaType) {
-        const user = await Storage.getItem("user");
-        const url = `${config.API_REST}/api/media/`;
+        try {
+            const user = await Storage.getItem("user");
+            const url = `${config.API_REST}/api/media/`;
 
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({ idMedia, mediaType, "idUser": user._id }),
-            headers: { 'Content-Type': 'application/json' }
-        });
+            const response = await axios.post(url, { idMedia, mediaType, "idUser": user._id });
 
-        const { status } = response;
-        const { message } = await response.json();
-       
-        if (status === STATUS_HTTP.BAD_REQUEST || status === STATUS_HTTP.ERROR) throw new Error(message);
+            const { data: { message } } = response;
 
-        return true;
+            return message;
+
+        } catch (err) {
+            const { data: { message } } = err.response;
+            throw new Error(message);
+        }
+    }
+
+    async checkInMyList(idMedia, mediaType) {
+        try {
+            const user = await Storage.getItem("user");
+            const url = `${config.API_REST}/api/media/isInMyList/${idMedia}/${mediaType}/${user._id}`;
+            const response = await axios.get(url);
+
+            const { data: { message: inMyList } } = response;
+
+            return inMyList;
+        } catch (err) {
+            const { data: { message } } = err.response;
+            throw new Error(message);
+        }
+    }
+
+    async deleteFromMyList(idMedia, mediaType) {
+        try {
+            const user = await Storage.getItem("user");
+            const url = `${config.API_REST}/api/media/deleteFromList/${idMedia}/${mediaType}/${user._id}`;
+            const response = await axios.delete(url);
+
+            const { data: { message } } = response;
+
+            return message;
+        } catch (err) {
+            console.log("err", err);
+            const { data: { message } } = err.response;
+            throw new Error(message);
+        }
     }
 
 }

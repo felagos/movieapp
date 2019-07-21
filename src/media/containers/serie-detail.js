@@ -6,7 +6,6 @@ import { backgroundColorBlack, colorWhite, backgroundColorRed } from '../../styl
 import Icon from '../../widgets/icon-widget';
 import CoverTitle from '../components/cover-title';
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -44,6 +43,7 @@ const styles = StyleSheet.create({
 });
 
 const SerieDetail = ({ serie, share, handleMyList, handleChangeSeason, seasonSelected, episodes, renderEpisodes }) => {
+    const iconName = serie.inMyList ? "ban" : "check";
 
     return (
         <View style={styles.container}>
@@ -52,11 +52,11 @@ const SerieDetail = ({ serie, share, handleMyList, handleChangeSeason, seasonSel
             </View>
             <View style={styles.buttonContainer}>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => handleMyList(serie.id)}>
-                    <Icon name='check' color={colorWhite.color} style={styles.icon} />
+                    <Icon name={iconName} color={colorWhite.color} style={styles.icon} size={18} />
                     <Text>Mi Lista</Text>
                 </Button>
                 <Button rounded iconLeft style={styles.buttonAction} onPress={() => share(serie.title, serie.homepage)}>
-                    <Icon name='share-alt' color={colorWhite.color} style={styles.icon} />
+                    <Icon name='share-alt' color={colorWhite.color} style={styles.icon} size={18} />
                     <Text>Compartir</Text>
                 </Button>
             </View>

@@ -1,5 +1,7 @@
 import { config } from '../config/config';
 import axios from 'axios';
+import MyListService from './my-list-service';
+import { MEDIA_TYPE } from '../util/constants';
 
 class MovieService {
 
@@ -36,6 +38,9 @@ class MovieService {
         const movie = response.data;
 
         movie.genres = movie.genres.map(genre => genre.name);
+
+        const inMyList = await MyListService.checkInMyList(movie.id, MEDIA_TYPE.MOVIE);
+        movie["inMyList"] = inMyList;
 
         return movie;
     }

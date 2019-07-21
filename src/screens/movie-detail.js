@@ -8,6 +8,7 @@ import * as Toast from '../util/toast';
 import Loader from '../widgets/loader-widget';
 import MovieDetailView from '../media/containers/movie-detail';
 import MyListService from '../services/my-list-service';
+import { MEDIA_TYPE } from '../util/constants';
 
 class MoviesDetail extends Component {
 
@@ -47,17 +48,44 @@ class MoviesDetail extends Component {
         });
     }
 
-    handleMyList = async id => {
+    addToMyList = async id => {
         try {
-            await MyListService.saveToMyList(id, "movie");
-            Toast.successToast("Agregada a mi lista");
-        } catch(err) {
+            await MyListService.saveToMyList(id, MEDIA_TYPE.MOVIE);
+            const movie = await MovieService.getDetail(id);
+
+            this.setState({ movie }, () => {
+                Toast.successToast("Agregada a mi lista");
+            });
+
+        } catch (err) {
             Toast.dangerToast(err.message);
         }
     }
 
+    deleteFromMyList = async id => {
+        try {
+            await MyListService.deleteFromMyList(id, MEDIA_TYPE.MOVIE);
+            const movie = await MovieService.getDetail(id);
+
+            this.setState({ movie }, () => {
+                Toast.successToast("Quitada de mi lista");
+            });
+
+        } catch (err) {
+            Toast.dangerToast(err.message);
+        }
+    }
+
+    handleMyList = async id => {
+        if (this.state.movie.inMyList)
+            this.deleteFromMyList(id);
+        else
+            this.addToMyList(id);
+    }
+
     render() {
         const { movie, loading } = this.state;
+
         return (
             <MediaDetailLayout>
                 <Loader loading={loading} text="Cargando película ..." />

@@ -1,5 +1,7 @@
 import { config } from '../config/config';
 import axios from 'axios';
+import MyListService from './my-list-service';
+import { MEDIA_TYPE } from '../util/constants';
 
 class SerieService {
 
@@ -52,9 +54,10 @@ class SerieService {
             return { number: season.season_number, name: season.name };
         });
 
-        let response = { id, genres, homepage, title, overview, backdrop_path, seasons } = serie;
+        const inMyList = await MyListService.checkInMyList(serie.id, MEDIA_TYPE.SERIE);
+        serie["inMyList"] = inMyList;
 
-        return response;
+        return serie;
     }
 
     async doSearch(term, page = 1) {

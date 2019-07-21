@@ -4,5 +4,11 @@ export const STATUS_HTTP = {
     "BAD_REQUEST": 400,
     "NOT_FOUND": 404,
     "UNAUTHORIZED": 401,
-    "ERROR": 500 
-}
+    "ERROR": 500
+};
+
+export const MEDIA_TYPE = {
+    "SERIE": "serie",
+    "MOVIE": "movie"
+};
+

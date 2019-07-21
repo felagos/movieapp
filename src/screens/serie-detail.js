@@ -8,11 +8,12 @@ import SerieService from '../services/series-service';
 import SerieDetailView from '../media/containers/serie-detail';
 import EpisodeItem from '../media/components/episodes';
 import MyListService from '../services/my-list-service';
+import { MEDIA_TYPE } from '../util/constants';
 
 class SerieDetail extends Component {
 
     state = {
-        serie: null,
+        serie: {},
         seasonSelected: "",
         episodes: [],
         loading: true
@@ -48,13 +49,39 @@ class SerieDetail extends Component {
         });
     }
 
-    handleMyList = async id => {
+    addToMyList = async id => {
         try {
-            await MyListService.saveToMyList(id, "serie");
-            Toast.successToast("Agregada a mi lista");
+            await MyListService.saveToMyList(id, MEDIA_TYPE.SERIE);
+            const serie = await SerieService.getDetail(id);
+
+            this.setState({ serie }, () => {
+                Toast.successToast("Agregada a mi lista");
+            });
+
         } catch (err) {
             Toast.dangerToast(err.message);
         }
+    }
+
+    deleteFromMyList = async id => {
+        try {
+            await MyListService.deleteFromMyList(id, MEDIA_TYPE.SERIE);
+            const serie = await SerieService.getDetail(id);
+
+            this.setState({ serie }, () => {
+                Toast.successToast("Quitada de mi lista");
+            });
+
+        } catch (err) {
+            Toast.dangerToast(err.message);
+        }
+    }
+
+    handleMyList = async id => {
+        if (this.state.serie.inMyList)
+            this.deleteFromMyList(id);
+        else
+            this.addToMyList(id);
     }
 
     handleChangeSeason = async value => {
@@ -83,7 +110,14 @@ class SerieDetail extends Component {
         return (
             <MediaDetailLayout>
                 <Loader loading={loading} text="Cargando serie ..." />
-                {!loading && <SerieDetailView renderEpisodes={this.renderEpisodes} episodes={episodes} seasonSelected={seasonSelected} serie={serie} share={this.share} handleMyList={this.handleMyList} handleChangeSeason={this.handleChangeSeason} />}
+                {!loading && <SerieDetailView
+                    renderEpisodes={this.renderEpisodes}
+                    episodes={episodes}
+                    seasonSelected={seasonSelected}
+                    serie={serie}
+                    share={this.share}
+                    handleMyList={this.handleMyList}
+                    handleChangeSeason={this.handleChangeSeason} />}
             </MediaDetailLayout>
         );
     }
