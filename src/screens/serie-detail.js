@@ -50,7 +50,7 @@ class SerieDetail extends Component {
 
     handleMyList = async id => {
         try {
-            await MyListService.saveToMyList(id, "movie");
+            await MyListService.saveToMyList(id, "serie");
             Toast.successToast("Agregada a mi lista");
         } catch (err) {
             Toast.dangerToast(err.message);
