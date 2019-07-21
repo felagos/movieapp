@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, Alert } from 'react-native';
 import { Content, Form, Item, Input, Label, Button, View } from 'native-base';
-import LoginLayout from '../layouts/login/login-layout';
+import { colorWhite, backgroundColorRed, colorRed } from '../styles/styles';
+import AuthLayout from '../layouts/auth/auth-layout';
 import Icon from '../widgets/icon-widget';
-import { colorWhite, backgroundColorRed, backgroundColorBlack } from '../styles/styles';
+import AuthService from '../services/auth-service';
+import StorageService from '../services/storage-service';
+
+import FormValidation, { loginRules } from '../form/form-validator';
 
 const styles = StyleSheet.create({
     containerForm: {
-        width: '100%',
+        width: '100%'
     },
     button: {
         ...backgroundColorRed
@@ -29,6 +33,9 @@ const styles = StyleSheet.create({
     },
     label: {
         ...colorWhite
+    },
+    error: {
+        ...colorRed
     }
 });
 
@@ -39,7 +46,7 @@ class Login extends Component {
             email: "",
             password: ""
         },
-        error: {
+        errors: {
             email: "",
             password: ""
         }
@@ -52,13 +59,31 @@ class Login extends Component {
     }
 
     handleChange = (field, value) => {
-        const { form } = this.state;
+        const message = FormValidation.validateField(field, loginRules, value);
+
+        const { errors, form } = this.state;
         form[field] = value;
-        this.setState(form);
+        errors[field] = message;
+
+        this.setState({ form, errors });
     }
 
-    handleSubmit = () => {
+    handleSubmit = async () => {
 
+        const isValid = FormValidation.isValidForm(this.state.form, loginRules);
+
+        if (isValid) {
+            const { form: { email, password } } = this.state;
+            try {
+                const user = await AuthService.doLogin(email, password);
+                await StorageService.setItem("user", user);
+
+                this.props.navigation.navigate("SignIn");
+            } catch (err) {
+                Alert.alert("", err.message);
+            }
+        }
+        else Alert.alert("", "Revise los datos del formualario");
     }
 
     goToregister = () => {
@@ -66,23 +91,24 @@ class Login extends Component {
     }
 
     render() {
-        const { form: { email, password } } = this.state;
-
+        const { form: { email, password }, errors } = this.state;
         return (
-            <LoginLayout>
+            <AuthLayout>
                 <Content style={styles.containerForm}>
                     <Form>
                         <Item floatingLabel>
                             <Label style={styles.label}>Email</Label>
                             <Input style={styles.label} placeholderTextColor={colorWhite.color} keyboardType="email-address" value={email} onChangeText={value => this.handleChange("email", value)} />
                         </Item>
+                        {errors.email !== "" && <Text style={styles.error}>{errors.email}</Text>}
 
                         <Item floatingLabel last>
                             <Label style={styles.label}>Contraseña</Label>
                             <Input style={styles.label} placeholderTextColor={colorWhite.color} secureTextEntry={true} value={password} onChangeText={value => this.handleChange("password", value)} />
                         </Item>
-
+                        {errors.password !== "" && <Text style={styles.error}>{errors.password}</Text>}
                     </Form>
+
                     <View style={styles.containerButtons}>
                         <Button style={styles.button} iconLeft full danger onPress={this.handleSubmit}>
                             <Icon name="sign-in" size={18} color="white" />
@@ -92,9 +118,10 @@ class Login extends Component {
                             Registrarse
                         </Text>
                     </View>
+
                 </Content>
 
-            </LoginLayout>
+            </AuthLayout>
         );
     }
 

@@ -7,6 +7,7 @@ import MovieService from '../services/movie-service';
 import * as Toast from '../util/toast';
 import Loader from '../widgets/loader-widget';
 import MovieDetailView from '../media/containers/movie-detail';
+import MyListService from '../services/my-list-service';
 
 class MoviesDetail extends Component {
 
@@ -47,7 +48,12 @@ class MoviesDetail extends Component {
     }
 
     handleMyList = async id => {
-        Toast.successToast("Agregada a mi lista");
+        try {
+            await MyListService.saveToMyList(id, "movie");
+            Toast.successToast("Agregada a mi lista");
+        } catch(err) {
+            Toast.dangerToast(err.message);
+        }
     }
 
     render() {

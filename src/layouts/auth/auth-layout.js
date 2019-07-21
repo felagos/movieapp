@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const LoginLayout = props => {
+const AuthLayout = props => {
     return (
         <SafeAreaView style={styles.container}>
             {props.children}
@@ -20,4 +20,4 @@ const LoginLayout = props => {
     );
 }
 
-export default LoginLayout;
+export default AuthLayout;

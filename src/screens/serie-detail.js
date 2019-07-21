@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Share, View } from 'react-native';
-import { imdbUrl } from '../util/util';
+import { Share } from 'react-native';
 import Header from '../layouts/media-detail/header';
 import MediaDetailLayout from '../layouts/media-detail/media-detail-layout';
 import * as Toast from '../util/toast';
@@ -8,6 +7,7 @@ import Loader from '../widgets/loader-widget';
 import SerieService from '../services/series-service';
 import SerieDetailView from '../media/containers/serie-detail';
 import EpisodeItem from '../media/components/episodes';
+import MyListService from '../services/my-list-service';
 
 class SerieDetail extends Component {
 
@@ -49,7 +49,12 @@ class SerieDetail extends Component {
     }
 
     handleMyList = async id => {
-        Toast.successToast("Agregada a mi lista");
+        try {
+            await MyListService.saveToMyList(id, "movie");
+            Toast.successToast("Agregada a mi lista");
+        } catch (err) {
+            Toast.dangerToast(err.message);
+        }
     }
 
     handleChangeSeason = async value => {

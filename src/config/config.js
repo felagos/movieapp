@@ -5,5 +5,6 @@ export const config = {
     LANG: "es_ES",
     BASE_IMG: "https://image.tmdb.org/t/p",
     GOOGLE_API_KEY: "AIzaSyDv8ck3ivxgGgoAY9s1onG1zcRKQMfgGOo",
-    IMDB_URL: 'https://www.imdb.com/title'
+    IMDB_URL: 'https://www.imdb.com/title',
+    API_REST: 'http://10.0.2.2:3000'
 };
