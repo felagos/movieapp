@@ -11,7 +11,9 @@ import FormValidation, { loginRules } from '../form/form-validator';
 
 const styles = StyleSheet.create({
     containerForm: {
-        width: '100%'
+        flex: 1,
+        width: '100%',
+
     },
     button: {
         ...backgroundColorRed
@@ -49,7 +51,9 @@ class Login extends Component {
         errors: {
             email: "",
             password: ""
-        }
+        },
+        isPassword: true,
+        iconPassword: "eye"
     };
 
     static navigationOptions = () => {
@@ -90,21 +94,34 @@ class Login extends Component {
         this.props.navigation.navigate("Register");
     }
 
+    handleShowPassowrd = () => {
+        let { isPassword, iconPassword } = this.state;
+        if (isPassword) {
+            isPassword = false;
+            iconPassword = "eye-slash"
+        }
+        else {
+            isPassword = true;
+            iconPassword = "eye";
+        }
+        this.setState({ isPassword, iconPassword });
+    }
+
     render() {
-        const { form: { email, password }, errors } = this.state;
+        const { form: { email, password }, errors, isPassword, iconPassword } = this.state;
         return (
             <AuthLayout>
                 <Content style={styles.containerForm}>
                     <Form>
-                        <Item floatingLabel>
+                        <Item floatingLabel error={errors.email !== ""}>
                             <Label style={styles.label}>Email</Label>
                             <Input style={styles.label} placeholderTextColor={colorWhite.color} keyboardType="email-address" value={email} onChangeText={value => this.handleChange("email", value)} />
                         </Item>
                         {errors.email !== "" && <Text style={styles.error}>{errors.email}</Text>}
 
-                        <Item floatingLabel last>
+                        <Item floatingLabel error={errors.password !== ""}>
                             <Label style={styles.label}>Contraseña</Label>
-                            <Input style={styles.label} placeholderTextColor={colorWhite.color} secureTextEntry={true} value={password} onChangeText={value => this.handleChange("password", value)} />
+                            <Input style={styles.label} placeholderTextColor={colorWhite.color} secureTextEntry={isPassword} value={password} onChangeText={value => this.handleChange("password", value)} />
                         </Item>
                         {errors.password !== "" && <Text style={styles.error}>{errors.password}</Text>}
                     </Form>

@@ -6,5 +6,5 @@ export const config = {
     BASE_IMG: "https://image.tmdb.org/t/p",
     GOOGLE_API_KEY: "AIzaSyDv8ck3ivxgGgoAY9s1onG1zcRKQMfgGOo",
     IMDB_URL: 'https://www.imdb.com/title',
-    API_REST: 'http://10.0.2.2:3000'
+    API_REST: 'https://movieapp-express.herokuapp.com'
 };
