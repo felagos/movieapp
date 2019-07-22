@@ -66,6 +66,13 @@ class SerieService {
         return response.data.results;
     }
 
+    async getOnTheAir(page = 1) {
+        const url = `${config.API_BASE}/movie/on_the_air?api_key${config.API_KEY}&language=${config.LANG}&page=${page}`;
+        const response = await axios.get(url);
+
+        return { data: { total_pages, results } } = response;
+    }
+
 }
 
 export default new SerieService();

@@ -52,6 +52,21 @@ class MyListService {
         }
     }
 
+    async getMyList() {
+        try {
+            const user = await Storage.getItem("user");
+            const url = `${config.API_REST}/api/media/${user._id}`;
+            const response = axios.get(url);
+            const { data: { message } } = response;
+
+            return message;
+        } catch (err) {
+            console.log("err", err);
+            const { data: { message } } = err.response;
+            throw new Error(message);
+        }
+    }
+
 }
 
 export default new MyListService();

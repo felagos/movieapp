@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from '../services/auth-service';
-import LoadingLayout from '../sections/components/loading-layout';
+import LoadingLayout from '../layouts/loading/loading-layout';
 
 class Loading extends Component {
 

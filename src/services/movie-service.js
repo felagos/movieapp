@@ -51,6 +51,13 @@ class MovieService {
         return response.data.results;
     }
 
+    async getNotPlaying(page = 1) {
+        const url = `${config.API_BASE}/movie/not_playing?api_key${config.API_KEY}&language=${config.LANG}&page=${page}`;
+        const response = await axios.get(url);
+
+        return { data: { total_pages, results } } = response;
+    }
+
 }
 
 export default new MovieService();
