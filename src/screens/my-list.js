@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, StyleSheet, SafeAreaView, FlatList, Dimensions } from 'react-native';
+import { View, StatusBar, StyleSheet, SafeAreaView, FlatList, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import { CachedImage } from 'react-native-cached-image';
 import { backgroundColorBlack } from '../styles/styles';
 import MyListService from '../services/my-list-service';
@@ -39,10 +39,33 @@ class MyList extends Component {
         const width = Dimensions.get("window").width / 2.2;
 
         return (
-            <View style={{ margin: 10, height: 250, width }}>
-                <CachedImage source={img} style={{ height: 250, width }} />
-            </View>
+            <TouchableOpacity onPress={() => this.handleDelete(item.id, item.mediaType)}>
+                <View style={{ margin: 10, height: 250, width }}>
+                    <CachedImage source={img} style={{ height: 250, width }} />
+                </View>
+            </TouchableOpacity>
         );
+    }
+
+    handleDelete = async (id, mediaType) => {
+        Alert.alert("Confirmar",
+            "¿ Desea eliminarla de la lista ?",
+            [
+                {
+                    text: 'Aceptar', 
+                    onPress: async () => {
+                        await MyListService.deleteFromMyList(id, mediaType);
+                        const myList = await MyListService.getMyList();
+                        this.setState({ myList });
+                    }
+                },
+                {
+                    text: 'Cancelar',
+                    style: 'cancel',
+                }
+            ]
+        );
+
     }
 
     render() {

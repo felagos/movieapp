@@ -53,6 +53,7 @@ class SerieService {
         serie.seasons = serie.seasons.map(season => {
             return { number: season.season_number, name: season.name };
         });
+        serie["mediaType"] = MEDIA_TYPE.SERIE;
 
         if (checkInMyList) {
             const inMyList = await MyListService.checkInMyList(serie.id, MEDIA_TYPE.SERIE);

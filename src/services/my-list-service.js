@@ -48,7 +48,7 @@ class MyListService {
 
             const { data: { message } } = response;
 
-            return [];
+            return true;
         } catch (err) {
             console.log("err", err);
             const { data: { message } } = err.response;

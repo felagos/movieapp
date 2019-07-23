@@ -38,6 +38,7 @@ class MovieService {
         const movie = response.data;
 
         movie.genres = movie.genres.map(genre => genre.name);
+        movie["mediaType"] = MEDIA_TYPE.MOVIE;
 
         if (checkInMyList) {
             const inMyList = await MyListService.checkInMyList(movie.id, MEDIA_TYPE.MOVIE);
