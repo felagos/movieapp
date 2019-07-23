@@ -46,7 +46,7 @@ class SerieService {
         });
     }
 
-    async getDetail(id) {
+    async getDetail(id, checkInMyList = true) {
         const { data: serie } = await axios.get(`${config.API_BASE}/tv/${id}?api_key=${config.API_KEY}&language=${config.LANG}`);
 
         serie.genres = serie.genres.map(genre => genre.name);
@@ -54,8 +54,10 @@ class SerieService {
             return { number: season.season_number, name: season.name };
         });
 
-        const inMyList = await MyListService.checkInMyList(serie.id, MEDIA_TYPE.SERIE);
-        serie["inMyList"] = inMyList;
+        if (checkInMyList) {
+            const inMyList = await MyListService.checkInMyList(serie.id, MEDIA_TYPE.SERIE);
+            serie["inMyList"] = inMyList;
+        }
 
         return serie;
     }

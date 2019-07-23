@@ -31,7 +31,7 @@ class MovieService {
         return response.data.results.map(result => result.key);
     }
 
-    async getDetail(id) {
+    async getDetail(id, checkInMyList = true) {
         const url = `${config.API_BASE}/movie/${id}?api_key=${config.API_KEY}&language=${config.LANG}`;
 
         const response = await axios.get(url);
@@ -39,8 +39,10 @@ class MovieService {
 
         movie.genres = movie.genres.map(genre => genre.name);
 
-        const inMyList = await MyListService.checkInMyList(movie.id, MEDIA_TYPE.MOVIE);
-        movie["inMyList"] = inMyList;
+        if (checkInMyList) {
+            const inMyList = await MyListService.checkInMyList(movie.id, MEDIA_TYPE.MOVIE);
+            movie["inMyList"] = inMyList;
+        }
 
         return movie;
     }

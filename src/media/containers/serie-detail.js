@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Picker } from 'react-native';
-import { Text, Button } from 'native-base';
+import { StyleSheet, View, FlatList } from 'react-native';
+import { Text, Button, Picker } from 'native-base';
 import { concatGenres, getImageObject } from '../../util/util';
 import { backgroundColorBlack, colorWhite, backgroundColorRed } from '../../styles/styles';
 import Icon from '../../widgets/icon-widget';
@@ -66,6 +66,7 @@ const SerieDetail = ({ serie, share, handleMyList, handleChangeSeason, seasonSel
 
             <View style={styles.subContainer}>
                 <Picker
+                iosIcon={<Icon name="chevron-down" color="white" />}
                     mode="modal"
                     placeholder="Temporadas"
                     style={styles.picker}

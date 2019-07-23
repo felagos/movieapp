@@ -50,8 +50,9 @@ class MoviesDetail extends Component {
 
     addToMyList = async id => {
         try {
+            const { movie } = this.state;
             await MyListService.saveToMyList(id, MEDIA_TYPE.MOVIE);
-            const movie = await MovieService.getDetail(id);
+            movie.inMyList = true;
 
             this.setState({ movie }, () => {
                 Toast.successToast("Agregada a mi lista");
@@ -64,8 +65,9 @@ class MoviesDetail extends Component {
 
     deleteFromMyList = async id => {
         try {
+            const { movie } = this.state;
             await MyListService.deleteFromMyList(id, MEDIA_TYPE.MOVIE);
-            const movie = await MovieService.getDetail(id);
+            movie.inMyList = false;
 
             this.setState({ movie }, () => {
                 Toast.successToast("Quitada de mi lista");

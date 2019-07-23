@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, View, StatusBar } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { Container } from 'native-base';
 import { backgroundColorBlack } from '../../styles/styles';
 

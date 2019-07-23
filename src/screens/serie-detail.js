@@ -51,8 +51,9 @@ class SerieDetail extends Component {
 
     addToMyList = async id => {
         try {
+            const { serie } = this.state;
             await MyListService.saveToMyList(id, MEDIA_TYPE.SERIE);
-            const serie = await SerieService.getDetail(id);
+            serie.inMyList = true;
 
             this.setState({ serie }, () => {
                 Toast.successToast("Agregada a mi lista");
@@ -65,8 +66,9 @@ class SerieDetail extends Component {
 
     deleteFromMyList = async id => {
         try {
+            const { serie } = this.state;
             await MyListService.deleteFromMyList(id, MEDIA_TYPE.SERIE);
-            const serie = await SerieService.getDetail(id);
+            serie.inMyList = false;
 
             this.setState({ serie }, () => {
                 Toast.successToast("Quitada de mi lista");
