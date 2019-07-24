@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, StatusBar, StyleSheet, SafeAreaView, FlatList, Dimensions, TouchableOpacity, Alert, Image } from 'react-native';
-import { CachedImage } from 'react-native-cached-image';
 import { backgroundColorBlack } from '../styles/styles';
 import MyListService from '../services/my-list-service';
 import Loader from '../widgets/loader-widget';

@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, Dimensions, ImageBackground } from 'react-native';
-import { CachedImage } from 'react-native-cached-image';
 import { colorWhite, colorRed } from '../../styles/styles';
 
 const styles = StyleSheet.create({

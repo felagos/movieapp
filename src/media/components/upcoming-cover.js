@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity, View, ImageBackground } from 'react-native';
-import { CachedImage } from 'react-native-cached-image';
 import { Card, CardItem } from 'native-base';
 import { getImage, IMG_SIZE } from '../../util/util';
 import Icon from '../../widgets/icon-widget';

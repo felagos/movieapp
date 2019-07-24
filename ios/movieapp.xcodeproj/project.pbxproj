@@ -79,7 +79,6 @@
 		4D54B9FBB7C14D09B1072C55 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D7B7DB366514335A7AC2454 /* Zocial.ttf */; };
 		5E57EF425AE047FB90DD4374 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE664D5BEAC449C191A82527 /* libRCTYouTube.a */; };
 		419618AF44D14355BC0BA1F3 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F61177FFD1844D0A6F28D8D /* libRNCAsyncStorage.a */; };
-		2217EF8E40D34B0D9C5049D7 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 478882451F5D429F946E1AD8 /* libRNFetchBlob.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,8 +430,6 @@
 		FE664D5BEAC449C191A82527 /* libRCTYouTube.a */ = {isa = PBXFileReference; name = "libRCTYouTube.a"; path = "libRCTYouTube.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		CFBD2BAB10C04404A8D4ED3C /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; name = "RNCAsyncStorage.xcodeproj"; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		5F61177FFD1844D0A6F28D8D /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; name = "libRNCAsyncStorage.a"; path = "libRNCAsyncStorage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		929FB60E714F47D1BC6C3F28 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		478882451F5D429F946E1AD8 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,7 +462,6 @@
 				819223BFB2BA4AA1B3C2439D /* libRNGestureHandler.a in Frameworks */,
 				5E57EF425AE047FB90DD4374 /* libRCTYouTube.a in Frameworks */,
 				419618AF44D14355BC0BA1F3 /* libRNCAsyncStorage.a in Frameworks */,
-				2217EF8E40D34B0D9C5049D7 /* libRNFetchBlob.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +657,6 @@
 				D5C401CE546042858C4F77EC /* RNGestureHandler.xcodeproj */,
 				5C66E16C12C9484E90959F00 /* RCTYouTube.xcodeproj */,
 				CFBD2BAB10C04404A8D4ED3C /* RNCAsyncStorage.xcodeproj */,
-				929FB60E714F47D1BC6C3F28 /* RNFetchBlob.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";

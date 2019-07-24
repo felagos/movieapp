@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, FlatList, Dimensions, TouchableOpacity, Image } from 'react-native';
-import { CachedImage } from 'react-native-cached-image';
 import Header from '../layouts/media/header';
 import Loader from '../widgets/loader-widget';
 import SerieService from '../services/series-service';

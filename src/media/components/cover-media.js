@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { CachedImage } from 'react-native-cached-image';
 import { cutString, getImage, IMG_SIZE } from '../../util/util';
 
 const styles = StyleSheet.create({
