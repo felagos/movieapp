@@ -42,18 +42,28 @@ class Series extends Component {
     }
 
     renderElement = ({ item }) => {
-        const img = !item.poster_path ? require('../assets/no_disponible.jpg') : { uri: `${getImage(item.poster_path, IMG_SIZE.w200)}` };
         const width = Dimensions.get("window").width / 2.2;
-        
+
+        let img = require('../assets/no_disponible.jpg');
+        if (item.poster_path) {
+            const uri = getImage(item.poster_path, IMG_SIZE.w200);
+            Image.prefetch(uri);
+            img = { uri };
+        }
+
         return (
             <TouchableOpacity onPress={() => {
-                this.props.navigation.navigate("SerieDetail", { id: item.id, media: "tv", title: item.name });
+                this.seeDetail(id, "tv", item.name);
             }}>
                 <View style={{ margin: 10, height: 250, width }}>
                     <Image source={img} style={{ height: 250, width }} />
                 </View>
             </TouchableOpacity>
         );
+    }
+
+    seeDetail = (id, media, title) => {
+        this.props.navigation.navigate("MovieDetail", { id, media, title })
     }
 
     render() {

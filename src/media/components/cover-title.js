@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Dimensions } from 'react-native';
+import { StyleSheet, Text, Dimensions, ImageBackground } from 'react-native';
 import { CachedImage } from 'react-native-cached-image';
 import { colorWhite, colorRed } from '../../styles/styles';
 
@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
 
 const CoverTitle = ({ uri, title }) => {
     return (
-        <CachedImage style={styles.img} source={uri}>
+        <ImageBackground style={styles.img} source={uri}>
             {title && <Text style={styles.titleCover}>{title}</Text>}
-        </CachedImage>
+        </ImageBackground>
     );
 }
 

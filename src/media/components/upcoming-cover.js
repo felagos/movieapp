@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, View, ImageBackground } from 'react-native';
 import { CachedImage } from 'react-native-cached-image';
 import { Card, CardItem } from 'native-base';
 import { getImage, IMG_SIZE } from '../../util/util';
@@ -32,10 +32,11 @@ const styles = StyleSheet.create({
 });
 
 const UpcomingCover = ({ item, openVideo, seeDetail, width }) => {
+    const img = getImage(item.poster_path, IMG_SIZE.original);
     return (
         <Card style={styles.card}>
             <CardItem cardBody>
-                <CachedImage source={{ uri: `${getImage(item.poster_path, IMG_SIZE.original)}` }} style={[styles.img, { width }]}>
+                <ImageBackground source={{ uri: img }} style={[styles.img, { width }]}>
                     <TouchableOpacity onPress={() => { openVideo(item.id); }}>
                         <Image style={styles.imgPlay} source={require('../../assets/icon-play.png')} />
                     </TouchableOpacity>
@@ -44,7 +45,7 @@ const UpcomingCover = ({ item, openVideo, seeDetail, width }) => {
                             <Icon name="info-circle" color="white" size={30} />
                         </TouchableOpacity>
                     </View>
-                </CachedImage>
+                </ImageBackground>
             </CardItem>
         </Card>
     );
