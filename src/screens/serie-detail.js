@@ -28,7 +28,7 @@ class SerieDetail extends Component {
 
     async componentDidMount() {
 
-        this.props.navigation.addListener('willFocus', async () => {
+        this.props.navigation.addListener('didFocus', async () => {
             try {
                 const id = this.props.navigation.getParam("id");
                 const serie = await SerieService.getDetail(id);

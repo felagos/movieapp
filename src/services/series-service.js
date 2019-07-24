@@ -70,10 +70,11 @@ class SerieService {
     }
 
     async getOnTheAir(page = 1) {
-        const url = `${config.API_BASE}/movie/on_the_air?api_key${config.API_KEY}&language=${config.LANG}&page=${page}`;
+        const url = `${config.API_BASE}/tv/on_the_air?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
         const response = await axios.get(url);
+        const data = response.data;
 
-        return { data: { total_pages, results } } = response;
+        return { total_pages, results } = data;
     }
 
 }
