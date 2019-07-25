@@ -14,8 +14,7 @@ const styles = StyleSheet.create({
     img: {
         height: 300,
         alignItems: 'center',
-        justifyContent: 'center',
-        resizeMode: 'stretch'
+        justifyContent: 'center'
     },
     imgPlay: {
         width: 200,
@@ -35,7 +34,7 @@ const UpcomingCover = ({ item, openVideo, seeDetail, width }) => {
     return (
         <Card style={styles.card}>
             <CardItem cardBody>
-                <ImageBackground source={{ uri: img }} style={[styles.img, { width }]}>
+                <ImageBackground resizeMode="stretch" source={{ uri: img }} style={[styles.img, { width }]}>
                     <TouchableOpacity onPress={() => { openVideo(item.id); }}>
                         <Image style={styles.imgPlay} source={require('../../assets/icon-play.png')} />
                     </TouchableOpacity>

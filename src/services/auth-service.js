@@ -20,6 +20,8 @@ class AuthService {
         const { status } = response;
         const { data, message } = await response.json();
 
+        console.log("message", message)
+
         if (status === STATUS_HTTP.BAD_REQUEST
             || status === STATUS_HTTP.ERROR
             || status === STATUS_HTTP.UNAUTHORIZED) throw new Error(message);

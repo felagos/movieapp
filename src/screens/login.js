@@ -6,8 +6,8 @@ import AuthLayout from '../layouts/auth/auth-layout';
 import Icon from '../widgets/icon-widget';
 import AuthService from '../services/auth-service';
 import StorageService from '../services/storage-service';
-
 import FormValidation, { loginRules } from '../form/form-validator';
+import Loader from '../widgets/loader-widget';
 
 const styles = StyleSheet.create({
     containerForm: {
@@ -53,7 +53,8 @@ class Login extends Component {
             password: ""
         },
         isPassword: true,
-        iconPassword: "eye"
+        iconPassword: "eye",
+        loading: false
     };
 
     static navigationOptions = () => {
@@ -78,14 +79,19 @@ class Login extends Component {
 
         if (isValid) {
             const { form: { email, password } } = this.state;
-            try {
-                const user = await AuthService.doLogin(email, password);
-                await StorageService.setItem("user", user);
 
-                this.props.navigation.navigate("SignIn");
-            } catch (err) {
-                Alert.alert("", err.message);
-            }
+            this.setState({ loading: true }, async () => {
+                try {
+                    const user = await AuthService.doLogin(email, password);
+                    await StorageService.setItem("user", user);
+
+                    this.props.navigation.navigate("SignIn");
+                } catch (err) {
+                    this.setState({ loading: false });
+                    Alert.alert("", err.message);
+                }
+            });
+
         }
         else Alert.alert("", "Revise los datos del formualario");
     }
@@ -108,9 +114,11 @@ class Login extends Component {
     }
 
     render() {
-        const { form: { email, password }, errors, isPassword, iconPassword } = this.state;
+        const { form: { email, password }, errors, isPassword, iconPassword, loading } = this.state;
+        
         return (
             <AuthLayout>
+                <Loader loading={loading} text="Validando usuario ..." />
                 <Content style={styles.containerForm}>
                     <Form>
                         <Item floatingLabel error={errors.email !== ""}>
