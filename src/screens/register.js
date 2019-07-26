@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, StatusBar, Text, Alert } from 'react-native';
 import { Content, Form, Item, Input, Label, Button, View } from 'native-base';
-import { colorWhite, backgroundColorRed, colorRed, backgroundColorBlack } from '../styles/styles';
+import { colorWhite, backgroundColorRed, colorRed } from '../styles/styles';
 import AuthLayout from '../layouts/auth/auth-layout';
 import HeaderRegister from '../layouts/auth/header-register';
 import Icon from '../widgets/icon-widget';
 import AuthService from '../services/auth-service';
 import StorageService from '../services/storage-service';
 import FormValidation, { registerRules } from '../form/form-validator';
+import Loader from '../widgets/loader-widget';
 
 const styles = StyleSheet.create({
     containerForm: {
@@ -53,7 +54,8 @@ class Register extends Component {
             nick: "",
             password: "",
             repeatPassword: ""
-        }
+        },
+        loading: false
     };
 
     static navigationOptions = ({ navigation }) => {
@@ -76,18 +78,23 @@ class Register extends Component {
         const isValid = FormValidation.isValidForm(this.state.form, registerRules);
 
         if (isValid) {
-            try {
-                const { form: user } = this.state;
-                const response = await AuthService.doRegister(user);
+            this.setState({ loading: true }, () => {
+                try {
+                    const { form: user } = this.state;
+                    const response = await AuthService.doRegister(user);
 
-                if (response) {
-                    await StorageService.setItem("user", user);
-                    this.props.navigation.navigate("SignIn");
+                    this.setState({ loading: false });
+
+                    if (response) {
+                        await StorageService.setItem("user", user);
+                        this.props.navigation.navigate("SignIn");
+                    }
+    
+                } catch (err) {
+                    this.setState({ loading: false });
+                    Alert.alert("", err.message);
                 }
-
-            } catch (err) {
-                Alert.alert("", err.message);
-            }
+            });
         }
         else Alert.alert("", "Revise los datos del formualario");
 
@@ -96,10 +103,11 @@ class Register extends Component {
     render() {
         StatusBar.setBackgroundColor('#221f1f', true);
 
-        const { form: { email, nick, password, repeatPassword }, errors } = this.state;
+        const { form: { email, nick, password, repeatPassword }, errors, loading } = this.state;
 
         return (
             <AuthLayout>
+                <Loader loading={loading} text="Registrando usuario ..." />
                 <Content style={styles.containerForm}>
                     <Form>
                         <Form>
