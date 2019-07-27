@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, FlatList, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { FlatList } from 'react-native';
 import Header from '../layouts/media/header';
 import Loader from '../widgets/loader-widget';
 import MovieService from '../services/movie-service';
 import MediaLayout from '../layouts/media/media-layout';
-import { getImage, IMG_SIZE } from '../util/util';
+import CoverMedia from '../media/components/cover-media';
 
 class Movies extends Component {
 
@@ -17,7 +17,7 @@ class Movies extends Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            header: <Header goBack={navigation.goBack} />
+            header: <Header goBack={navigation.goBack} title="Películas" />
         }
     }
 
@@ -26,14 +26,16 @@ class Movies extends Component {
     }
 
     loadData = async () => {
-        const { page } = this.state;
-        let { total_pages, results: movies } = await MovieService.getNowPlaying(page);
+        const { page, totalPage } = this.state;
+        if (page < totalPage) {
+            let { total_pages, results: movies } = await MovieService.getNowPlaying(page);
 
-        if (page !== 1) {
-            movies = [...this.state.movies, ...movies];
+            if (page !== 1) {
+                movies = [...this.state.movies, ...movies];
+            }
+
+            this.setState({ movies, loading: false, total_pages });
         }
-
-        this.setState({ movies, loading: false, total_pages });
     }
 
     loadMoreData = async () => {
@@ -41,24 +43,7 @@ class Movies extends Component {
     }
 
     renderElement = ({ item }) => {
-        const width = Dimensions.get("window").width / 2.2;
-        
-        let img = require('../assets/no_disponible.jpg');
-        if (item.poster_path) {
-            const uri = getImage(item.poster_path, IMG_SIZE.w200);
-            Image.prefetch(uri);
-            img = { uri };
-        }
-
-        return (
-            <TouchableOpacity onPress={() => {
-                this.seeDetail(item.id, "movie", item.title);
-            }}>
-                <View style={{ margin: 10, height: 250, width }}>
-                    <Image source={img} style={{ height: 250, width }} />
-                </View>
-            </TouchableOpacity>
-        );
+        return <CoverMedia columns={2} item={item} media="film" seeDetail={this.seeDetail} />
     }
 
     seeDetail = (id, media, title) => {

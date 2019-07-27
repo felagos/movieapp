@@ -78,7 +78,7 @@ class Register extends Component {
         const isValid = FormValidation.isValidForm(this.state.form, registerRules);
 
         if (isValid) {
-            this.setState({ loading: true }, () => {
+            this.setState({ loading: true }, async () => {
                 try {
                     const { form: user } = this.state;
                     const response = await AuthService.doRegister(user);

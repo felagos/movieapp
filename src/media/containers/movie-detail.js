@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const MovieDetail = ({ movie, share, handleMyList }) => {
+const MovieDetail = ({ movie, share, handleMyList }) => { 
     const iconName = movie.inMyList ? "ban" : "check";
     
     return (
@@ -56,7 +56,7 @@ const MovieDetail = ({ movie, share, handleMyList }) => {
                 </Button>
             </View>
             <View style={styles.containerOverview}>
-                <Text style={styles.overview}>{movie.overview}</Text>
+                <Text style={styles.overview}>{movie.overview ?  movie.overview : "Resumen no disponible"}</Text>
             </View>
         </View>
     );

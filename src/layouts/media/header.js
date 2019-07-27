@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { Header, Left, Button } from 'native-base';
-import { backgroundColorBlack, colorRed } from '../../styles/styles';
+import { backgroundColorBlack, colorRed, colorWhite } from '../../styles/styles';
 import Icon from '../../widgets/icon-widget';
 
 const styles = StyleSheet.create({
@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start'
+    },
+    title: {
+        ...colorWhite,
+        fontSize: 18
     }
 });
 
@@ -20,6 +24,7 @@ const HeaderMedia = props => {
                 <Button onPress={() => props.goBack()} transparent>
                     <Icon name='arrow-left' size={20} color={colorRed.color} />
                 </Button>
+                <Text style={styles.title}>{props.title}</Text>
             </Left>
         </Header>
     );
