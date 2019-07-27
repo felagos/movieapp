@@ -35,15 +35,12 @@ const CoverMedia = ({ item, seeDetail, media, columns = 1 }) => {
         const width = Dimensions.get("window").width / column;
         widthStyle["width"] = width;
     }
-
-
+    
     if (item.poster_path) {
         const uri = getImage(item.poster_path, IMG_SIZE.w200);
         Image.prefetch(uri);
         img = { uri };
     }
-
-    console.log(widthStyle);
 
     return (
         <View style={styles.card}>

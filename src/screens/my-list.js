@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, StatusBar, StyleSheet, SafeAreaView, FlatList, Dimensions, TouchableOpacity, Alert, Image } from 'react-native';
+import { View, StatusBar, StyleSheet, SafeAreaView, FlatList, Alert } from 'react-native';
 import { backgroundColorBlack } from '../styles/styles';
 import MyListService from '../services/my-list-service';
 import Loader from '../widgets/loader-widget';
-import { getImage, IMG_SIZE } from '../util/util';
+import { MEDIA_TYPE } from '../util/constants';
+import CoverMyList from '../media/components/cover-my-list';
 
 const styles = StyleSheet.create({
     container: {
@@ -33,23 +34,17 @@ class MyList extends Component {
 
     }
 
-    renderElement = ({ item }) => {
-        const width = Dimensions.get("window").width / 2.2;
-        
-        let img = require('../assets/no_disponible.jpg');
-        if (item.poster_path) {
-            const uri = getImage(item.poster_path, IMG_SIZE.w200);
-            Image.prefetch(uri);
-            img = { uri };
+    seeDetail = (id, title, media) => {
+        if (media === MEDIA_TYPE.MOVIE) {
+            this.props.navigation.navigate("MovieDetail", { id, title });
         }
+        else {
+            this.props.navigation.navigate("SerieDetail", { id, title });
+        }
+    }
 
-        return (
-            <TouchableOpacity onPress={() => this.handleDelete(item.id, item.mediaType)}>
-                <View style={{ margin: 10, height: 250, width }}>
-                    <Image source={img} style={{ height: 250, width }} />
-                </View>
-            </TouchableOpacity>
-        );
+    renderElement = ({ item }) => {
+        return <CoverMyList item={item} handleDelete={this.handleDelete} seeDetail={this.seeDetail} />
     }
 
     handleDelete = async (id, mediaType) => {
