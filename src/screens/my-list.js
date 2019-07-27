@@ -21,6 +21,13 @@ class MyList extends Component {
         loading: true
     };
 
+    static navigationOptions = ({ navigation }) => {
+        return {
+            header: null
+        }
+    }
+
+
     async componentDidMount() {
         this.props.navigation.addListener('willFocus', async () => {
             try {

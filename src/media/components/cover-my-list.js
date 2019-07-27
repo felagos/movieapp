@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     card: {
         flex: 1,
         flexDirection: 'column',
-        height: 300,
+        height: 290,
         width,
         margin: 5,
         ...backgroundColorBlack
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     },
     img: {
         width,
-        height: 300,
+        height: 290,
         alignItems: 'center',
         justifyContent: 'center'
     },
