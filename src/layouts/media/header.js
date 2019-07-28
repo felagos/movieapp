@@ -24,7 +24,7 @@ const HeaderMedia = props => {
                 <Button onPress={() => props.goBack()} transparent>
                     <Icon name='arrow-left' size={20} color={colorRed.color} />
                 </Button>
-                <Text style={styles.title}>{props.title}</Text>
+                {props.title && <Text style={styles.title}>{props.title}</Text>}
             </Left>
         </Header>
     );

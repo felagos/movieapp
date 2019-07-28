@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Platform, Dimensions, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
 import { colorWhite } from '../../styles/styles';
-import { youtubeAndroid, youtubeIOS } from '../../util/youtube';
 import { dangerToast } from '../../util/toast';
 import { withNavigation } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
@@ -29,13 +28,9 @@ class UpcomingMoviesList extends PureComponent {
         }
 
         else {
-            if (Platform.OS === "android") {
-                youtubeAndroid(videoIds);
-            }
-            else {
-                youtubeIOS(videoIds[0]);
-            }
+            this.props.navigation.navigate("Video", { videos: videoIds });
         }
+
     }
 
     handleRotation = () => {

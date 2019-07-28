@@ -18,14 +18,18 @@ const styles = StyleSheet.create({
     }
 })
 
-const LoadingLayout = () => {
+const LoadingLayout = props => {
     StatusBar.setBackgroundColor(colorBlack.color);
+    const { showIcon = true } = props;
     return (
         <View style={styles.container}>
-            <Image
-                source={require('../../assets/movie-icon.png')}
-                style={styles.logo}
-            />
+            {
+                showIcon &&
+                <Image
+                    source={require('../../assets/movie-icon.png')}
+                    style={styles.logo}
+                />
+            }
             <ActivityIndicator color={colorRed.color} />
         </View>
     );
