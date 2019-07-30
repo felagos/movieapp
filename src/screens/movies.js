@@ -27,8 +27,9 @@ class Movies extends Component {
 
     loadData = async () => {
         const { page, totalPage } = this.state;
-        if (page < totalPage) {
+        if (page < totalPage || totalPage === null) {
             let { total_pages, results: movies } = await MovieService.getNowPlaying(page);
+            console.log(movies)
 
             if (page !== 1) {
                 movies = [...this.state.movies, ...movies];

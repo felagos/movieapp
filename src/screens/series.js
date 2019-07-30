@@ -27,7 +27,7 @@ class Series extends Component {
 
     loadData = async () => {
         const { page, totalPage } = this.state;
-        if (page < totalPage) {
+        if (page < totalPage || totalPage === null) {
             let { total_pages, results: series } = await SerieService.getOnTheAir(page);
 
             if (page !== 1) {
