@@ -1,7 +1,9 @@
 import { config } from '../config/config';
 import axios from 'axios';
 import MyListService from './my-list-service';
+import NetInfoService from './netinfo-service';
 import { MEDIA_TYPE } from '../util/constants';
+import StorageService from './storage-service';
 
 class MovieService {
 
@@ -20,9 +22,19 @@ class MovieService {
     }
 
     async getUpcoming(page = 1) {
-        const url = `${config.API_BASE}/movie/upcoming?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
-        const response = await axios.get(url);
-        return response.data.results;
+        const isConnected = NetInfoService.isConnected();
+        if (isConnected) {
+            const url = `${config.API_BASE}/movie/upcoming?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
+            const response = await axios.get(url);
+
+            await StorageService.setItem(`upcoming_${page}`, response.data.results);
+
+            return response.data.results;
+        }
+        else {
+            return await StorageService.getItem(`upcoming_${page}`);
+        }
+
     }
 
     async getMovieTrailer(id) {

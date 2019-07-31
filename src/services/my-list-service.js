@@ -41,7 +41,6 @@ class MyListService {
 
     async deleteFromMyList(idMedia, mediaType) {
         try {
-            const myList = [];
             const user = await Storage.getItem("user");
             const url = `${config.API_REST}/api/media/deleteFromList/${idMedia}/${mediaType}/${user._id}`;
             const response = await axios.delete(url);
