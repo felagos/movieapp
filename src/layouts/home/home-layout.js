@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, View, ScrollView, StyleSheet, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 import { backgroundColorBlack, colorWhite } from '../../styles/styles';
 
 const styles = StyleSheet.create({

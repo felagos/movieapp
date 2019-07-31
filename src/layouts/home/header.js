@@ -6,7 +6,7 @@ import { backgroundColorBlack, colorWhite } from '../../styles/styles';
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        paddingTop: 30
+        paddingTop: 50
     },
     left: {
         flex: 1,
