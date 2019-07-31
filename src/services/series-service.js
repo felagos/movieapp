@@ -1,6 +1,8 @@
 import { config } from '../config/config';
 import axios from 'axios';
 import MyListService from './my-list-service';
+import SqliteService from './sqlite-service';
+import NetInfoService from './netinfo-service';
 import { MEDIA_TYPE } from '../util/constants';
 
 class SerieService {
@@ -12,9 +14,18 @@ class SerieService {
     }
 
     async getTopRated(page = 1) {
-        const url = `${config.API_BASE}/tv/top_rated?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
-        const response = await axios.get(url);
-        return response.data.results;
+        const isConnected = await NetInfoService.isConnected();
+        if (isConnected) {
+            const url = `${config.API_BASE}/tv/top_rated?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
+            const response = await axios.get(url);
+
+            await SqliteService.updateData(page, response.data.results, "series");
+
+            return response.data.results;
+        }
+        else {
+            return await SqliteService.getData(page, "series");
+        }
     }
 
     async getGenreByIds(ids) {

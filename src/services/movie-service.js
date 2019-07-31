@@ -3,7 +3,7 @@ import axios from 'axios';
 import MyListService from './my-list-service';
 import NetInfoService from './netinfo-service';
 import { MEDIA_TYPE } from '../util/constants';
-import StorageService from './storage-service';
+import SqliteService from './sqlite-service';
 
 class MovieService {
 
@@ -16,23 +16,33 @@ class MovieService {
     }
 
     async getTopRated(page = 1) {
-        const url = `${config.API_BASE}/movie/top_rated?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
-        const response = await axios.get(url);
-        return response.data.results;
-    }
-
-    async getUpcoming(page = 1) {
-        const isConnected = NetInfoService.isConnected();
+        const isConnected = await NetInfoService.isConnected();
         if (isConnected) {
-            const url = `${config.API_BASE}/movie/upcoming?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
+            const url = `${config.API_BASE}/movie/top_rated?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
             const response = await axios.get(url);
 
-            await StorageService.setItem(`upcoming_${page}`, response.data.results);
+            await SqliteService.updateData(page, response.data.results, "movies");
 
             return response.data.results;
         }
         else {
-            return await StorageService.getItem(`upcoming_${page}`);
+            return await SqliteService.getData(page, "movies");
+        }
+    }
+
+    async getUpcoming(page = 1) {
+        const isConnected = await NetInfoService.isConnected();
+        if (isConnected) {
+            const url = `${config.API_BASE}/movie/upcoming?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
+            const response = await axios.get(url);
+
+            await SqliteService.updateData(page, response.data.results, "upcoming");
+
+            return response.data.results;
+        }
+        else {
+            const data = await SqliteService.getData(page, "upcoming");
+            return data;
         }
 
     }
