@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Header, Left, Text } from 'native-base';
+import DeviceInfo from 'react-native-device-info';
 import { backgroundColorBlack, colorWhite } from '../../styles/styles';
 
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        paddingTop: 50
+        paddingTop: DeviceInfo.hasNotch ? 50 : 30,
+        ...backgroundColorBlack
     },
     left: {
         flex: 1,
