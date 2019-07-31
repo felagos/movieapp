@@ -7,7 +7,7 @@ import { backgroundColorBlack, colorWhite } from '../../styles/styles';
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        paddingTop: DeviceInfo.hasNotch ? 50 : 30,
+        paddingTop: DeviceInfo.hasNotch() ? 50 : 30,
         ...backgroundColorBlack
     },
     left: {
