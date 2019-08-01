@@ -3,7 +3,7 @@ import axios from 'axios';
 import MyListService from './my-list-service';
 import NetInfoService from './netinfo-service';
 import { MEDIA_TYPE } from '../util/constants';
-import SqliteService from './sqlite-service';
+import SqliteService, { TABLES } from './sqlite-service';
 
 class MovieService {
 
@@ -21,12 +21,12 @@ class MovieService {
             const url = `${config.API_BASE}/movie/top_rated?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
             const response = await axios.get(url);
 
-            await SqliteService.updateData(page, response.data.results, "movies");
+            await SqliteService.updateData(page, response.data.results, TABLES.MOVIES);
 
             return response.data.results;
         }
         else {
-            return await SqliteService.getData(page, "movies");
+            return await SqliteService.getData(page, TABLES.MOVIES);
         }
     }
 
@@ -36,12 +36,12 @@ class MovieService {
             const url = `${config.API_BASE}/movie/upcoming?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
             const response = await axios.get(url);
 
-            await SqliteService.updateData(page, response.data.results, "upcoming");
+            await SqliteService.updateData(page, response.data.results, TABLES.UPCOMING);
 
             return response.data.results;
         }
         else {
-            const data = await SqliteService.getData(page, "upcoming");
+            const data = await SqliteService.getData(page, TABLES.UPCOMING);
             return data;
         }
 
@@ -54,20 +54,27 @@ class MovieService {
     }
 
     async getDetail(id, checkInMyList = true) {
-        const url = `${config.API_BASE}/movie/${id}?api_key=${config.API_KEY}&language=${config.LANG}`;
+        const isConnected = await NetInfoService.isConnected();
+        if (isConnected) {
+            const url = `${config.API_BASE}/movie/${id}?api_key=${config.API_KEY}&language=${config.LANG}`;
 
-        const response = await axios.get(url);
-        const movie = response.data;
+            const response = await axios.get(url);
+            const movie = response.data;
 
-        movie.genres = movie.genres.map(genre => genre.name);
-        movie["mediaType"] = MEDIA_TYPE.MOVIE;
+            movie.genres = movie.genres.map(genre => genre.name);
+            movie["mediaType"] = MEDIA_TYPE.MOVIE;
 
-        if (checkInMyList) {
-            const inMyList = await MyListService.checkInMyList(movie.id, MEDIA_TYPE.MOVIE);
-            movie["inMyList"] = inMyList;
+            if (checkInMyList) {
+                const inMyList = await MyListService.checkInMyList(movie.id, MEDIA_TYPE.MOVIE);
+                movie["inMyList"] = inMyList;
+            }
+
+            await SqliteService.updateDetail(id, movie, MEDIA_TYPE.MOVIE);
+
+            return movie;
         }
 
-        return movie;
+        return await SqliteService.getDetail(id, MEDIA_TYPE.MOVIE);
     }
 
     async doSearch(term, page = 1) {
@@ -77,11 +84,20 @@ class MovieService {
     }
 
     async getNowPlaying(page = 1) {
-        const url = `${config.API_BASE}/movie/now_playing?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
-        const response = await axios.get(url);
-        const data = response.data;
+        const isConnected = NetInfoService.isConnected();
+        if (isConnected) {
+            const url = `${config.API_BASE}/movie/now_playing?api_key=${config.API_KEY}&language=${config.LANG}&page=${page}`;
+            const response = await axios.get(url);
+            const data = response.data;
 
-        return { total_pages, results } = data;
+            const { total_pages, results } = data;
+
+            await SqliteService.updateData(page, { total_pages, results }, TABLES.UPCOMING);
+
+            return { total_pages, results };
+        }
+
+        return { total_pages, results } = await SqliteService.getData(page, TABLES.NOWPLAYING);
     }
 
 }
