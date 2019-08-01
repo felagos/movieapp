@@ -30,7 +30,7 @@ class MoviesDetail extends Component {
             try {
                 const id = this.props.navigation.getParam("id");
                 const movie = await MovieService.getDetail(id);
-
+console.log(movie)
                 this.setState({ movie, loading: false });
             } catch (err) {
                 this.setState({ movie: [], loading: false });

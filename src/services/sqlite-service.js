@@ -17,6 +17,14 @@ class SqliteService {
     constructor() {
         //SQLite.DEBUG(true);
         SQLite.enablePromise(true);
+        this._db = null;
+    }
+
+    async _getDB() {
+        if(this._db === null) {
+            this._db = await this._initDB();
+        }
+        return this._db;
     }
 
     async _initDB() {
@@ -34,20 +42,12 @@ class SqliteService {
         return db;
     }
 
-    _getInsertTable(table) {
-        return `INSERT INTO ${table} (id, data) VALUES (?, ?)`;
-    }
-
-    _getSelectTable(table) {
-        return `select * from ${table} where id = ?`;
-    }
-
     updateData(id, data, table) {
-        this._initDB().then(db => {
+        this._getDB().then(db => {
             db.transaction(tx => {
                 tx.executeSql(`update ${table} set data = ? where id = ?`, [JSON.stringify(data), id], (tx, results) => {
                     if (results.rowsAffected === 0) {
-                        this.insertData(db, table, id, data);
+                        this._insertData(db, table, id, data);
                     }
                 });
             });
@@ -55,7 +55,7 @@ class SqliteService {
     }
 
     updateDetail(id, data, type) {
-        this._initDB().then(db => {
+        this._getDB().then(db => {
             db.transaction(tx => {
                 tx.executeSql(`update detailmedia set data = ? where id = ? and type = ?`, [JSON.stringify(data), id, type], (tx, results) => {
                     if (results.rowsAffected === 0) {
@@ -71,7 +71,7 @@ class SqliteService {
 
         return new Promise((reject, resolve) => {
             db.transaction((tx) => {
-                tx.executeSql("insert into detailmedia (id, data, type, ?) values (? ,? ,?, ?)",
+                tx.executeSql("insert into detailmedia (id, data, type) values (? ,? ,?)",
                     [id, stringData, type],
                     () => {
                         resolve(true);
@@ -90,7 +90,7 @@ class SqliteService {
 
         return new Promise((reject, resolve) => {
             db.transaction((tx) => {
-                tx.executeSql(this.getInsertTable(table),
+                tx.executeSql(`INSERT INTO ${table} (id, data) VALUES (?, ?)`,
                     [id, stringData],
                     () => {
                         resolve(true);
@@ -105,9 +105,9 @@ class SqliteService {
     }
 
     getData(page, table) {
-        const query = this.getSelectTable(table);
+        const query = `select * from ${table} where id = ?`;
         return new Promise((resolve, reject) => {
-            this._initDB().then(db => {
+            this._getDB().then(db => {
                 db.transaction(tx => {
                     tx.executeSql(query, [page], (tx, results) => {
                         const len = results.rows.length;
@@ -122,11 +122,12 @@ class SqliteService {
 
     getDetail(id, type) {
         return new Promise((resolve, reject) => {
-            this._initDB().then(db => {
+            this._getDB().then(db => {
                 db.transaction(tx => {
                     tx.executeSql("select * from detailmedia where id = ? and type = ?", [id, type], (tx, results) => {
                         const len = results.rows.length;
                         const response = len == 0 ? {} : results.rows.item(0);
+
                         resolve(JSON.parse(response.data));
                     });
                 });
@@ -138,7 +139,7 @@ class SqliteService {
     insertMyList(data) {
         data = JSON.stringify(data);
         return new Promise((resolve, reject) => {
-            this._initDB().then(db => {
+            this._getDB().then(db => {
                 db.transaction(tx => {
                     tx.executeSql("delete from mylist", [], (tx) => {
                         tx.executeSql("insert into mylist(data) values (?)", [data], () => {
@@ -152,7 +153,7 @@ class SqliteService {
 
     getMyList() {
         return new Promise((resolve) => {
-            this._initDB().then(db => {
+            this._getDB().then(db => {
                 db.transaction(tx => {
                     tx.executeSql("select * from mylist", [], (tx, results) => {
                         const len = results.rows.length;

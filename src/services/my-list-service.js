@@ -57,7 +57,7 @@ class MyListService {
         }
     }
 
-    getMyList() {
+    async getMyList() {
         const isConnected = await NetInfoService.isConnected();
         if (isConnected) {
             return new Promise((resolve, reject) => {
@@ -82,8 +82,8 @@ class MyListService {
                             }
 
                             Promise.all(promises).then(data => {
-                                await SqliteService.insertMyList(data);
-                                resolve(data);
+                                SqliteService.insertMyList(data).then(data => resolve(data));
+                                
                             });
                         });
                     });
