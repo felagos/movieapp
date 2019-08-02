@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
 import { cutString, getImage, IMG_SIZE } from '../../util/util';
+import CachedImage from 'react-native-image-cache-wrapper';
 
 const styles = StyleSheet.create({
     card: {
@@ -46,7 +47,7 @@ const CoverMedia = ({ item, seeDetail, media, columns = 1 }) => {
         <View style={styles.card}>
             <TouchableOpacity onPress={() => { seeDetail(item.id, media, title); }}>
                 <View style={styles.cardBody}>
-                    <Image style={[styles.imageThumbnail, widthStyle]} source={img} />
+                    <CachedImage style={[styles.imageThumbnail, widthStyle]} source={img} />
                     {columns === 1 && <Text style={styles.title}>{cutString(title)}</Text>}
                 </View>
             </TouchableOpacity>

@@ -3,6 +3,7 @@ import { StyleSheet, Image, TouchableOpacity, View, ImageBackground } from 'reac
 import { Card, CardItem } from 'native-base';
 import { getImage, IMG_SIZE } from '../../util/util';
 import Icon from '../../widgets/icon-widget';
+import CachedImage from 'react-native-image-cache-wrapper';
 
 const styles = StyleSheet.create({
     container: {
@@ -14,7 +15,8 @@ const styles = StyleSheet.create({
     img: {
         height: 300,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        resizeMode: 'stretch'
     },
     imgPlay: {
         width: 200,
@@ -34,7 +36,7 @@ const UpcomingCover = ({ item, openVideo, seeDetail, width }) => {
     return (
         <Card style={styles.card}>
             <CardItem cardBody>
-                <ImageBackground resizeMode="stretch" source={{ uri: img }} style={[styles.img, { width }]}>
+                <CachedImage source={{ uri: img }} style={[styles.img, { width }]}>
                     <TouchableOpacity onPress={() => { openVideo(item.id); }}>
                         <Image style={styles.imgPlay} source={require('../../assets/icon-play.png')} />
                     </TouchableOpacity>
@@ -43,7 +45,7 @@ const UpcomingCover = ({ item, openVideo, seeDetail, width }) => {
                             <Icon name="info-circle" color="white" size={30} />
                         </TouchableOpacity>
                     </View>
-                </ImageBackground>
+                </CachedImage>
             </CardItem>
         </Card>
     );

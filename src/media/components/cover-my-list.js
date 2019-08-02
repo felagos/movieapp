@@ -3,7 +3,8 @@ import { StyleSheet, TouchableOpacity, ImageBackground, View, Dimensions } from 
 import { CardItem } from 'native-base';
 import Icon from '../../widgets/icon-widget';
 import { IMG_SIZE, getImage } from '../../util/util';
-import { backgroundColorBlack, colorRed, colorWhite } from '../../styles/styles';
+import { backgroundColorBlack } from '../../styles/styles';
+import CachedImage from 'react-native-image-cache-wrapper';
 
 const width = Dimensions.get("window").width / 2.2;
 
@@ -23,7 +24,8 @@ const styles = StyleSheet.create({
         width,
         height: 290,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        resizeMode: 'stretch'
     },
     info: {
         position: 'absolute',
@@ -39,13 +41,13 @@ const CoverMyList = ({ item, handleDelete, seeDetail }) => {
         <View style={styles.card}>
             <CardItem cardBody style={styles.item}>
                 <TouchableOpacity onPress={() => handleDelete(item.id, item.mediaType)}>
-                    <ImageBackground resizeMode="stretch" source={{ uri: img }} style={styles.img}>
+                    <CachedImage source={{ uri: img }} style={styles.img}>
                         <View style={styles.info}>
                             <TouchableOpacity onPress={() => seeDetail(item.id, item.title, item.mediaType)}>
                                 <Icon name="info-circle" color="white" size={30} />
                             </TouchableOpacity>
                         </View>
-                    </ImageBackground>
+                    </CachedImage>
                 </TouchableOpacity>
             </CardItem>
         </View>
