@@ -49,6 +49,12 @@ export const registerRules = {
         {
             test: defaultRules.required,
             message: "Contraseña obligatoria"
+        },
+        {
+            comparePassword: (password, repeatPassword) => {
+                return password === repeatPassword;
+            },
+            message: "Las contraseñas debe coincidir"
         }
     ]
 };
@@ -57,7 +63,7 @@ class FormValidator {
 
     static isValidForm(form, rules) {
         const fields = Object.keys(form);
-        
+
         for (const field of fields) {
 
             const fieldRules = rules[field];
@@ -73,6 +79,11 @@ class FormValidator {
                     const response = rule.test(value);
                     if (!response) return false;
                 }
+                if (typeof rule.comparePassword === "function") {
+                    const password = form["password"];
+                    const response = rule.comparePassword(password, value);
+                    if (!response) return rule.message;
+                }
             }
 
         }
@@ -80,7 +91,7 @@ class FormValidator {
         return true;
     }
 
-    static validateField(field, rules, value) {
+    static validateField(field, rules, value, form = {}) {
         const fieldRules = rules[field];
         for (const rule of fieldRules) {
             if (typeof rule.test === "object") {
@@ -90,6 +101,11 @@ class FormValidator {
             }
             if (typeof rule.test === "function") {
                 const response = rule.test(value);
+                if (!response) return rule.message;
+            }
+            if (typeof rule.comparePassword === "function") {
+                const password = form["password"];
+                const response = rule.comparePassword(password, value);
                 if (!response) return rule.message;
             }
         }

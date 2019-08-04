@@ -65,7 +65,7 @@ class Register extends Component {
     }
 
     handleChange = (field, value) => {
-        const message = FormValidation.validateField(field, registerRules, value);
+        const message = FormValidation.validateField(field, registerRules, value, this.state.form);
 
         const { errors, form } = this.state;
         form[field] = value;
