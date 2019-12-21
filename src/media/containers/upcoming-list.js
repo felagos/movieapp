@@ -7,6 +7,7 @@ import { withNavigation } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import MoviesService from '../../services/movie-service';
 import UpcomingCover from '../components/upcoming-cover';
+import { YouTubeStandaloneAndroid } from 'react-native-youtube';
 
 class UpcomingMoviesList extends PureComponent {
 
@@ -26,9 +27,14 @@ class UpcomingMoviesList extends PureComponent {
         if (videoIds.length === 0) {
             dangerToast("No se encontraron videos disponibles");
         }
-
         else {
-            this.props.navigation.navigate("Video", { videos: videoIds });
+            YouTubeStandaloneAndroid.playVideos({
+                apiKey: 'AIzaSyBbU95TmFevDq2y55p4PAE4xZU_jCXammE',
+                videoIds: videoIds,
+                autoplay: true,
+              }).then(() => console.log('Standalone Player Exited'))
+              .catch(errorMessage => alert(errorMessage));
+            //this.props.navigation.navigate("Video", { videos: videoIds });
         }
 
     }
