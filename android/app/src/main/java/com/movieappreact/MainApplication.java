@@ -1,4 +1,4 @@
-package com.movieapp;
+package com.movieappreact;
 
 import android.app.Application;
 
