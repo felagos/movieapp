@@ -82,7 +82,7 @@ class MyListService {
                             }
 
                             Promise.all(promises).then(data => {
-                                SqliteService.insertMyList(data).then(data => resolve(data));
+                                SqliteService.insertMyList(data).then(() => resolve(data));
                                 
                             });
                         });
