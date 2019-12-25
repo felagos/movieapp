@@ -79,7 +79,6 @@
 		4D54B9FBB7C14D09B1072C55 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D7B7DB366514335A7AC2454 /* Zocial.ttf */; };
 		5E57EF425AE047FB90DD4374 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE664D5BEAC449C191A82527 /* libRCTYouTube.a */; };
 		419618AF44D14355BC0BA1F3 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F61177FFD1844D0A6F28D8D /* libRNCAsyncStorage.a */; };
-		FDE2CD4F4E68407B9BC3FADF /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EEED88102E5429D86932331 /* libRNCWebView.a */; };
 		42B9D051F97D4D86969530E0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FDABC00E994FD9BF2A7AD8 /* libRNDeviceInfo.a */; };
 		54BE22195AD347FEBBE3DC46 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26FB7B412085453CB18A8177 /* libRNDeviceInfo-tvOS.a */; };
 		ECC9BF41FFF546389AFF457A /* libRNCNetInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFAB4CEA17C4F46A76DCF79 /* libRNCNetInfo.a */; };
@@ -436,8 +435,6 @@
 		FE664D5BEAC449C191A82527 /* libRCTYouTube.a */ = {isa = PBXFileReference; name = "libRCTYouTube.a"; path = "libRCTYouTube.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		CFBD2BAB10C04404A8D4ED3C /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; name = "RNCAsyncStorage.xcodeproj"; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		5F61177FFD1844D0A6F28D8D /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; name = "libRNCAsyncStorage.a"; path = "libRNCAsyncStorage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		11FE430134E44ED48EC373D7 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; name = "RNCWebView.xcodeproj"; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		9EEED88102E5429D86932331 /* libRNCWebView.a */ = {isa = PBXFileReference; name = "libRNCWebView.a"; path = "libRNCWebView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		BC8EC5D911F54318B42FA4F8 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; name = "RNDeviceInfo.xcodeproj"; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		04FDABC00E994FD9BF2A7AD8 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo.a"; path = "libRNDeviceInfo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		26FB7B412085453CB18A8177 /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo-tvOS.a"; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
@@ -478,7 +475,6 @@
 				819223BFB2BA4AA1B3C2439D /* libRNGestureHandler.a in Frameworks */,
 				5E57EF425AE047FB90DD4374 /* libRCTYouTube.a in Frameworks */,
 				419618AF44D14355BC0BA1F3 /* libRNCAsyncStorage.a in Frameworks */,
-				FDE2CD4F4E68407B9BC3FADF /* libRNCWebView.a in Frameworks */,
 				42B9D051F97D4D86969530E0 /* libRNDeviceInfo.a in Frameworks */,
 				ECC9BF41FFF546389AFF457A /* libRNCNetInfo.a in Frameworks */,
 				968FEC35D20D4F889FAD7670 /* libSQLite.a in Frameworks */,
@@ -680,7 +676,6 @@
 				D5C401CE546042858C4F77EC /* RNGestureHandler.xcodeproj */,
 				5C66E16C12C9484E90959F00 /* RCTYouTube.xcodeproj */,
 				CFBD2BAB10C04404A8D4ED3C /* RNCAsyncStorage.xcodeproj */,
-				11FE430134E44ED48EC373D7 /* RNCWebView.xcodeproj */,
 				BC8EC5D911F54318B42FA4F8 /* RNDeviceInfo.xcodeproj */,
 				B31F83B368FD455695199D79 /* RNCNetInfo.xcodeproj */,
 				B5BB0D8F61434BB083C661F1 /* SQLite.xcodeproj */,
@@ -1388,9 +1383,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movieapp.app/movieapp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1399,7 +1391,6 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
@@ -1424,9 +1415,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movieapp.app/movieapp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1435,7 +1423,6 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
@@ -1466,7 +1453,6 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
@@ -1496,7 +1482,6 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
@@ -1529,9 +1514,6 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1540,7 +1522,6 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
@@ -1573,9 +1554,6 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1584,7 +1562,6 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
@@ -1616,9 +1593,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1627,7 +1601,6 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
@@ -1659,9 +1632,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1670,7 +1640,6 @@
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\ios\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",

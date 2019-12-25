@@ -7,7 +7,7 @@ import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import org.pgsqlite.SQLitePluginPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.reactnativecommunity.webview.RNCWebViewPackage;
+
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -35,7 +35,6 @@ public class MainApplication extends Application implements ReactApplication {
             new SQLitePluginPackage(),
             new NetInfoPackage(),
             new RNDeviceInfo(),
-            new RNCWebViewPackage(),
             new AsyncStoragePackage(),
             new RNGestureHandlerPackage(),
             new VectorIconsPackage()

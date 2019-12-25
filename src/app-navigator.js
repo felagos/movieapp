@@ -10,7 +10,6 @@ import Loading from './screens/loading';
 import MovieDetail from './screens/movie-detail';
 import SerieDetail from './screens/serie-detail';
 import Series from './screens/series';
-import Video from './screens/video';
 import IconWidget from './widgets/icon-widget';
 import { tabNavigation } from './styles/styles';
 
@@ -20,8 +19,7 @@ const HomeStack = createStackNavigator(
         Movies,
         Series,
         MovieDetail,
-        SerieDetail,
-        Video
+        SerieDetail
     }
 );
 
